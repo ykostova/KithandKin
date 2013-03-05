@@ -11,7 +11,7 @@
 				
 				var circle2x = 640;
 				var circle2y = 280;
-				var circle2r = 100;
+				var circle2r = 200;
 				
 				var overlap = calculateOverlap(circle1x, circle1y, circle1r, circle2x, circle2y, circle2r);
 			
@@ -19,13 +19,13 @@
 				circle1 = R.circle(circle1x, circle1y, circle1r).attr({fill: "#000", "fill-opacity": 0, "stroke-width": 5, stroke: "#FFF"});
 				circle2 = R.circle(circle2x, circle2y, circle2r).attr({fill: "#000", "fill-opacity": 0, "stroke-width": 5, stroke: "#FFF"});
 				
-				
 				int0 = R.circle(overlap[0], overlap[1], 7).attr({fill: "#C00", "fill-opacity": 1, "stroke-width": 2, stroke: "#FFF"});
 				int1 = R.circle(overlap[2], overlap[3], 7).attr({fill: "#0C0", "fill-opacity": 1, "stroke-width": 2, stroke: "#FFF"});
 				side0 = R.circle(overlap[4], overlap[5], 7).attr({fill: "#00C", "fill-opacity": 1, "stroke-width": 2, stroke: "#FFF"});
 				side1 = R.circle(overlap[6], overlap[7], 7).attr({fill: "#CC0", "fill-opacity": 1, "stroke-width": 2, stroke: "#FFF"});
 				
-							
+				overlapPath = R.path('M' + overlap[0] + " " + overlap[1] + ' L' + overlap[4] + " " + overlap[5] + ' L' + overlap[2] + " " + overlap[3] + ' L' + overlap[6] + " " + overlap[7] + ' Z').attr({fill: "#000", "fill-opacity": 0, "stroke-width": 2, stroke: "#FFF"});
+			
                 var start = function () {
                     this.ox = this.attr("cx");
                     this.oy = this.attr("cy");
@@ -39,6 +39,10 @@
 					int1.attr({cx: overlap[2], cy: overlap[3]});
 					side0.attr({cx: overlap[4], cy: overlap[5]});
 					side1.attr({cx: overlap[6], cy: overlap[7]});
+					
+					overlapPath.remove();
+					overlapPath = R.path('M' + overlap[0] + " " + overlap[1] + ' L' + overlap[4] + " " + overlap[5] + ' L' + overlap[2] + " " + overlap[3] + ' L' + overlap[6] + " " + overlap[7] + ' Z').attr({fill: "#000", "fill-opacity": 0, "stroke-width": 2, stroke: "#FFF"});
+			
                 },
                 up = function () {
                 };
