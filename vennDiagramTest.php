@@ -5,13 +5,13 @@
 		
 		<script type="text/javascript">
 			window.onload = function () {
-				var circle1x = 350;
+				var circle1x = 380;
 				var circle1y = 240;
 				var circle1r = 200;
 				
 				var circle2x = 640;
 				var circle2y = 280;
-				var circle2r = 200;
+				var circle2r = 100;
 				
 				var overlap = calculateOverlap(circle1x, circle1y, circle1r, circle2x, circle2y, circle2r);
 			
@@ -50,8 +50,8 @@
 				sidex0 = x0 + r0 * Math.cos(theta0)
 				sidey0 = y0 + r0 * Math.sin(theta0)
 	
-				sidex1 = x1 + r0 * Math.cos(theta1)
-				sidey1 = y1 + r0 * Math.sin(theta1)
+				sidex1 = x1 + r1 * Math.cos(theta1)
+				sidey1 = y1 + r1 * Math.sin(theta1)
 				
 				var overlap = new Array();
 				overlap[0] = intx0;
