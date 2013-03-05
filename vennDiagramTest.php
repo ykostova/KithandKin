@@ -16,15 +16,41 @@
 				var overlap = calculateOverlap(circle1x, circle1y, circle1r, circle2x, circle2y, circle2r);
 			
 				var R = Raphael("holder", 1280, 720);
-				R.circle(circle1x, circle1y, circle1r).attr({fill: "#000", "fill-opacity": 0, "stroke-width": 5, stroke: "#FFF"});
-				R.circle(circle2x, circle2y, circle2r).attr({fill: "#000", "fill-opacity": 0, "stroke-width": 5, stroke: "#FFF"});
+				circle1 = R.circle(circle1x, circle1y, circle1r).attr({fill: "#000", "fill-opacity": 0, "stroke-width": 5, stroke: "#FFF"});
+				circle2 = R.circle(circle2x, circle2y, circle2r).attr({fill: "#000", "fill-opacity": 0, "stroke-width": 5, stroke: "#FFF"});
 				
 				
-				R.circle(overlap[0], overlap[1], 7).attr({fill: "#C00", "fill-opacity": 1, "stroke-width": 2, stroke: "#FFF"});
-				R.circle(overlap[2], overlap[3], 7).attr({fill: "#0C0", "fill-opacity": 1, "stroke-width": 2, stroke: "#FFF"});
-				R.circle(overlap[4], overlap[5], 7).attr({fill: "#00C", "fill-opacity": 1, "stroke-width": 2, stroke: "#FFF"});
-				R.circle(overlap[6], overlap[7], 7).attr({fill: "#CC0", "fill-opacity": 1, "stroke-width": 2, stroke: "#FFF"});
+				int0 = R.circle(overlap[0], overlap[1], 7).attr({fill: "#C00", "fill-opacity": 1, "stroke-width": 2, stroke: "#FFF"});
+				int1 = R.circle(overlap[2], overlap[3], 7).attr({fill: "#0C0", "fill-opacity": 1, "stroke-width": 2, stroke: "#FFF"});
+				side0 = R.circle(overlap[4], overlap[5], 7).attr({fill: "#00C", "fill-opacity": 1, "stroke-width": 2, stroke: "#FFF"});
+				side1 = R.circle(overlap[6], overlap[7], 7).attr({fill: "#CC0", "fill-opacity": 1, "stroke-width": 2, stroke: "#FFF"});
+				
+							
+                var start = function () {
+                    this.ox = this.attr("cx");
+                    this.oy = this.attr("cy");
+                },
+                move = function (dx, dy) {
+                    this.attr({cx: this.ox + dx, cy: this.oy + dy});
+					
+					var overlap = calculateOverlap(circle1.attr('cx'), circle1.attr('cy'), circle1r, circle2.attr('cx'), circle2.attr('cy'), circle2r);
+					
+					int0.attr({cx: overlap[0], cy: overlap[1]});
+					int1.attr({cx: overlap[2], cy: overlap[3]});
+					side0.attr({cx: overlap[4], cy: overlap[5]});
+					side1.attr({cx: overlap[6], cy: overlap[7]});
+                },
+                up = function () {
+                };
+				
+                R.set(circle1, circle2).drag(move, start, up);
+				
+				circle1.drag(move, start, up);
+				circle2.drag(move, start, up);
+				
 			}
+
+				
 			
 			function calculateOverlap(x0, y0, r0, x1, y1, r1)
 			{
