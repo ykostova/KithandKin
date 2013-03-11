@@ -2,6 +2,7 @@
 	<head>
 		<link rel="stylesheet" href="style.css">
         <script src="raphael-min.js"></script>
+		<script src="jquery-1.9.1.min.js"></script>
 		
 		<script type="text/javascript">
 			window.onload = function () {
@@ -14,8 +15,10 @@
 				var circle2r = 200;
 				
 				var overlap = calculateOverlap(circle1x, circle1y, circle1r, circle2x, circle2y, circle2r);
+				
+				var overlapPoints = new Array();
 			
-				var R = Raphael("holder", 1280, 720);
+				var R = Raphael("holder", $(document).width()-20, $(document).height()-20);
 				circle1 = R.circle(circle1x, circle1y, circle1r).attr({fill: "#000", "fill-opacity": 0, "stroke-width": 5, stroke: "#FFF"});
 				circle2 = R.circle(circle2x, circle2y, circle2r).attr({fill: "#000", "fill-opacity": 0, "stroke-width": 5, stroke: "#FFF"});
 				
@@ -47,14 +50,74 @@
                 up = function () {
                 };
 				
+				doubleclick = function (click) {
+					
+					newpointX = click.clientX;
+					newpointY = click.clientY;
+					
+					
+					
+				}
+				
+				drawPoints = function() {
+					//for(var i; i<overlapPoints.length; i++)
+					//{
+						new R.circle(click.clientX, click.clientY, 7).attr({fill: "#C00", "fill-opacity": 1, "stroke-width": 2, stroke: "#FFF"});
+					//}
+				}
+				
                 R.set(circle1, circle2).drag(move, start, up);
 				
 				circle1.drag(move, start, up);
 				circle2.drag(move, start, up);
-				
+				overlapPath.dblclick(doubleclick);
 			}
 
-				
+			function differenceTwoPoints(x0, y0, x1, y1)
+			{
+				return sqrt(square(x1-x0)+square(y1-y0));
+			}
+			
+			function getAngleTwoPoints (x0, y0, x1, y1)
+			{
+				return (Math.atan(((y1-y0)/(x1-x0))) * (180/Math.PI));
+			}
+			
+			function oppositeAngle (a)
+			{
+				if (a<270)
+				{
+					return a+90;
+				}
+				else
+				{
+					return a-270;
+				}
+			}
+			
+			function getPointOnLineY(x0, y0, x1, y1, x)
+			{
+				var m = getSlope(x0, y0, x1, y1)
+				var c = getYIntersect(x0, y0, m)
+				return (m*x)+c;
+			}
+			
+			function getPointOnLineX(x0, y0, x1, y1, y)
+			{
+				var m = getSlope(x0, y0, x1, y1)
+				var c = getYIntersect(x0, y0, m)
+				return (y-c)/m;
+			}
+			
+			function getYIntersect(x, y, m)
+			{
+				return -((m*x)-y);
+			}
+			
+			function getSlope(x0, y0, x1, y1)
+			{
+				return ((y1-y0)/(x1-x0));
+			}
 			
 			function calculateOverlap(x0, y0, r0, x1, y1, r1)
 			{
@@ -151,6 +214,7 @@
 
 				return [xi, xi_prime, yi, yi_prime];
 			}
+		
 		
 		</script>
 	</head>
