@@ -227,7 +227,6 @@ body {
   font-size: 14px;
   line-height: 20px;
   color: #333333;
-  background-color: #ffffff;
 }
 
 a {
@@ -248,13 +247,13 @@ a:focus {
 }
 
 .img-polaroid {
-  padding: 4px;
-  background-color: #fff;
+  padding: 6px;
+  background-color: #FBFBFB;
   border: 1px solid #ccc;
-  border: 1px solid rgba(0, 0, 0, 0.2);
-  -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-     -moz-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-          box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(0, 0, 0, 0.5);
+  -webkit-box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+     -moz-box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+          box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
 }
 
 .img-circle {
