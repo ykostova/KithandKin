@@ -5,18 +5,20 @@
 		<script src="jquery-1.9.1.min.js"></script>
 		
 		<script type="text/javascript">
-			window.onload = function () {
-				var circle1x = 380;
-				var circle1y = 240;
-				var circle1r = 300;
+				var circle1x = 400;
+				var circle1y = 200;
+				var circle1r = 200;
 				
-				var circle2x = 640;
-				var circle2y = 280;
-				var circle2r = 300;
+				var circle2x = 700;
+				var circle2y = 200;
+				var circle2r = 200;
 				
 				var overlap = calculateOverlap(circle1x, circle1y, circle1r, circle2x, circle2y, circle2r);
 				
+				var overlapOrigin;
 				var overlapPoints = new Array();
+			window.onload = function () {
+
 			
 				var R = Raphael("holder", $(document).width()-20, $(document).height()-20);
 				circle1 = R.circle(circle1x, circle1y, circle1r).attr({fill: "#000", "fill-opacity": 0, "stroke-width": 5, stroke: "#FFF"});
@@ -36,7 +38,7 @@
                 move = function (dx, dy) {
                     this.attr({cx: this.ox + dx, cy: this.oy + dy});
 					
-					var overlap = calculateOverlap(circle1.attr('cx'), circle1.attr('cy'), circle1r, circle2.attr('cx'), circle2.attr('cy'), circle2r);
+					overlap = calculateOverlap(circle1.attr('cx'), circle1.attr('cy'), circle1r, circle2.attr('cx'), circle2.attr('cy'), circle2r);
 					
 					int0.attr({cx: overlap[0], cy: overlap[1]});
 					int1.attr({cx: overlap[2], cy: overlap[3]});
@@ -55,7 +57,7 @@
 					newpointX = click.clientX;
 					newpointY = click.clientY;
 					
-					
+					setOrigin();
 					
 				}
 				
@@ -72,6 +74,12 @@
 				circle2.drag(move, start, up);
 				overlapPath.dblclick(doubleclick);
 			}
+			
+			function setOrigin()
+			{
+				var newOrigin = lineIntersection(overlap[0],overlap[1],overlap[2],overlap[3],overlap[4],overlap[5],overlap[6],overlap[7])
+				alert(newOrigin);
+			}
 
 			function differenceTwoPoints(x0, y0, x1, y1)
 			{
@@ -80,8 +88,8 @@
 			
 			function getRatio(x0, y0, x1, y1, xP, yP)
 			{
-				diffAB = differenceTwoPoints(x0, y0, x1, y1);
-				diffAP = differenceTwoPoints(x0, y0, xP, yP);
+				var diffAB = differenceTwoPoints(x0, y0, x1, y1);
+				var diffAP = differenceTwoPoints(x0, y0, xP, yP);
 				
 				
 				return diffAP/diffAB;
@@ -89,17 +97,17 @@
 			
 			function lineIntersection(x1, y1, x2, y2, x3, y3, x4, y4)
 			{
-				bx = x2 - x1;
-				by = y2 - y1;
-				dx = x4 - x3;
-				dy = y4 - y3; 
-				b_dot_d_perp = bx*dy - by*dx;
+				var bx = x2 - x1;
+				var by = y2 - y1;
+				var dx = x4 - x3;
+				var dy = y4 - y3; 
+				var b_dot_d_perp = bx*dy - by*dx;
 				if(b_dot_d_perp == 0) {
 					return false;
 				}
-				cx = x3-x1; 
-				cy = y3-y1;
-				t = (cx*dy - cy*dx) / b_dot_d_perp; 
+				var cx = x3-x1; 
+				var cy = y3-y1;
+				var t = (cx*dy - cy*dx) / b_dot_d_perp; 
 			 
 			  return [x1+t*bx, y1+t*by]; 
 			}
