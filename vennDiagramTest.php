@@ -19,7 +19,8 @@
 				var overlapPoints = new Array();
 			window.onload = function () {
 
-			
+				setOrigin();
+				
 				var R = Raphael("holder", $(document).width()-20, $(document).height()-20);
 				circle1 = R.circle(circle1x, circle1y, circle1r).attr({fill: "#000", "fill-opacity": 0, "stroke-width": 5, stroke: "#FFF"});
 				circle2 = R.circle(circle2x, circle2y, circle2r).attr({fill: "#000", "fill-opacity": 0, "stroke-width": 5, stroke: "#FFF"});
@@ -31,6 +32,8 @@
 				
 				overlapPath = R.path('M' + overlap[0] + " " + overlap[1] + ' L' + overlap[4] + " " + overlap[5] + ' L' + overlap[2] + " " + overlap[3] + ' L' + overlap[6] + " " + overlap[7] + ' Z').attr({fill: "#000", "fill-opacity": 0, "stroke-width": 2, stroke: "#FFF"});
 			
+				originCircle = R.circle(overlapOrigin[0], overlapOrigin[1], 7).attr({fill: "#C0C", "fill-opacity": 1, "stroke-width": 2, stroke: "#FFF"});
+				
                 var start = function () {
                     this.ox = this.attr("cx");
                     this.oy = this.attr("cy");
@@ -38,12 +41,16 @@
                 move = function (dx, dy) {
                     this.attr({cx: this.ox + dx, cy: this.oy + dy});
 					
+					setOrigin();
+					
 					overlap = calculateOverlap(circle1.attr('cx'), circle1.attr('cy'), circle1r, circle2.attr('cx'), circle2.attr('cy'), circle2r);
 					
 					int0.attr({cx: overlap[0], cy: overlap[1]});
 					int1.attr({cx: overlap[2], cy: overlap[3]});
 					side0.attr({cx: overlap[4], cy: overlap[5]});
 					side1.attr({cx: overlap[6], cy: overlap[7]});
+					
+					originCircle.attr({cx: overlapOrigin[0], cy: overlapOrigin[1]});
 					
 					overlapPath.remove();
 					overlapPath = R.path('M' + overlap[0] + " " + overlap[1] + ' L' + overlap[4] + " " + overlap[5] + ' L' + overlap[2] + " " + overlap[3] + ' L' + overlap[6] + " " + overlap[7] + ' Z').attr({fill: "#000", "fill-opacity": 0, "stroke-width": 2, stroke: "#FFF"});
@@ -77,8 +84,7 @@
 			
 			function setOrigin()
 			{
-				var newOrigin = lineIntersection(overlap[0],overlap[1],overlap[2],overlap[3],overlap[4],overlap[5],overlap[6],overlap[7])
-				alert(newOrigin);
+				overlapOrigin = lineIntersection(overlap[0],overlap[1],overlap[2],overlap[3],overlap[4],overlap[5],overlap[6],overlap[7]);
 			}
 
 			function differenceTwoPoints(x0, y0, x1, y1)
