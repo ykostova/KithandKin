@@ -5518,14 +5518,14 @@ input[type="submit"].btn.btn-mini {
 }
 
 .thumbnails {
-  margin-left: -20px;
+  margin-left: 20px;
   list-style: none;
   *zoom: 1;
 }
 
 .thumbnails:before,
 .thumbnails:after {
-  display: table;
+  display:block;
   line-height: 0;
   content: "";
 }
@@ -5534,8 +5534,12 @@ input[type="submit"].btn.btn-mini {
   clear: both;
 }
 
-.row-fluid .thumbnails {
-  margin-left: 0;
+.row-fluid {
+  margin-left:0px;
+}
+
+.thumbnails {
+  margin-left: 20px;
 }
 
 .thumbnails > li {
