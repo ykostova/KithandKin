@@ -8,11 +8,11 @@
 			window.onload = function () {
 				var circle1x = 380;
 				var circle1y = 240;
-				var circle1r = 200;
+				var circle1r = 300;
 				
 				var circle2x = 640;
 				var circle2y = 280;
-				var circle2r = 200;
+				var circle2r = 300;
 				
 				var overlap = calculateOverlap(circle1x, circle1y, circle1r, circle2x, circle2y, circle2r);
 				
@@ -75,7 +75,33 @@
 
 			function differenceTwoPoints(x0, y0, x1, y1)
 			{
-				return sqrt(square(x1-x0)+square(y1-y0));
+				return Math.sqrt(Math.pow(x1-x0, 2) + Math.pow(y1-y0, 2));
+			}
+			
+			function getRatio(x0, y0, x1, y1, xP, yP)
+			{
+				diffAB = differenceTwoPoints(x0, y0, x1, y1);
+				diffAP = differenceTwoPoints(x0, y0, xP, yP);
+				
+				
+				return diffAP/diffAB;
+			}
+			
+			function lineIntersection(x1, y1, x2, y2, x3, y3, x4, y4)
+			{
+				bx = x2 - x1;
+				by = y2 - y1;
+				dx = x4 - x3;
+				dy = y4 - y3; 
+				b_dot_d_perp = bx*dy - by*dx;
+				if(b_dot_d_perp == 0) {
+					return false;
+				}
+				cx = x3-x1; 
+				cy = y3-y1;
+				t = (cx*dy - cy*dx) / b_dot_d_perp; 
+			 
+			  return [x1+t*bx, y1+t*by]; 
 			}
 			
 			function getAngleTwoPoints (x0, y0, x1, y1)
