@@ -17,6 +17,8 @@
 				
 				var overlapOrigin;
 				var overlapPoints = new Array();
+				
+				var disableDrag=false;
 			window.onload = function () {
 
 				setOrigin();
@@ -34,57 +36,114 @@
 			
 				originCircle = R.circle(overlapOrigin[0], overlapOrigin[1], 7).attr({fill: "#C0C", "fill-opacity": 1, "stroke-width": 2, stroke: "#FFF"});
 				
-                var start = function () {
-                    this.ox = this.attr("cx");
-                    this.oy = this.attr("cy");
-                },
-                move = function (dx, dy) {
-                    this.attr({cx: this.ox + dx, cy: this.oy + dy});
-					
-					setOrigin();
-					
-					overlap = calculateOverlap(circle1.attr('cx'), circle1.attr('cy'), circle1r, circle2.attr('cx'), circle2.attr('cy'), circle2r);
-					
-					int0.attr({cx: overlap[0], cy: overlap[1]});
-					int1.attr({cx: overlap[2], cy: overlap[3]});
-					side0.attr({cx: overlap[4], cy: overlap[5]});
-					side1.attr({cx: overlap[6], cy: overlap[7]});
-					
-					originCircle.attr({cx: overlapOrigin[0], cy: overlapOrigin[1]});
-					
-					overlapPath.remove();
-					overlapPath = R.path('M' + overlap[0] + " " + overlap[1] + ' L' + overlap[4] + " " + overlap[5] + ' L' + overlap[2] + " " + overlap[3] + ' L' + overlap[6] + " " + overlap[7] + ' Z').attr({fill: "#000", "fill-opacity": 0, "stroke-width": 2, stroke: "#FFF"});
-			
-                },
-                up = function () {
-                };
-				
+				overlapCircles = new Array();
+												
 				doubleclick = function (click) {
 					
-					newpointX = click.clientX;
-					newpointY = click.clientY;
-					
-					setOrigin();
-					
+		
 				}
 				
+                var start = function (x,y) {
+					this.ox = this.attr("cx");
+					this.oy = this.attr("cy");
+
+					if(Raphael.isPointInsidePath(overlapPath.attrs.path,x,y))
+					{
+						disableDrag=true;
+						
+						newpointX = x;
+						newpointY = y;
+						
+
+						var pointUcoord = findPointOnLinePerpendicularY(overlapOrigin[0], overlapOrigin[1],overlap[0],overlap[1],x,y);
+						var pointVcoord = findPointOnLinePerpendicularX(overlapOrigin[0], overlapOrigin[1],overlap[4],overlap[5],x,y);
+						var ratioU = getRatio(overlapOrigin[0], overlapOrigin[1],overlap[0],overlap[1],pointUcoord[0],pointUcoord[1]);
+						var ratioV = getRatio(overlapOrigin[0], overlapOrigin[1],overlap[4],overlap[5],pointVcoord[0],pointVcoord[1]);
+						
+						if(x<overlapOrigin[0])
+						{
+							ratioU = -ratioU;
+						}
+						
+						if(y<overlapOrigin[1])
+						{
+							ratioV = -ratioV;
+						}
+						
+						overlapPoints.push([ratioU, ratioV]);
+						overlapCircles.push(R.circle(0,0,7));
+					}
+                },
+                move = function (dx, dy) {
+					if(disableDrag==false)
+					{
+						this.attr({cx: this.ox + dx, cy: this.oy + dy});
+						
+						setOrigin();
+						
+						overlap = calculateOverlap(circle1.attr('cx'), circle1.attr('cy'), circle1r, circle2.attr('cx'), circle2.attr('cy'), circle2r);
+						
+						int0.attr({cx: overlap[0], cy: overlap[1]});
+						int1.attr({cx: overlap[2], cy: overlap[3]});
+						side0.attr({cx: overlap[4], cy: overlap[5]});
+						side1.attr({cx: overlap[6], cy: overlap[7]});
+						
+						originCircle.attr({cx: overlapOrigin[0], cy: overlapOrigin[1]});
+						
+						overlapPath.remove();
+						overlapPath = R.path('M' + overlap[0] + " " + overlap[1] + ' L' + overlap[4] + " " + overlap[5] + ' L' + overlap[2] + " " + overlap[3] + ' L' + overlap[6] + " " + overlap[7] + ' Z').attr({fill: "#000", "fill-opacity": 0, "stroke-width": 2, stroke: "#FFF"});
+						this.toFront();
+						overlapPath.toBack();
+						drawPoints();
+					}
+                },
+                up = function () {
+					disableDrag=false;
+                };
+
 				drawPoints = function() {
-					//for(var i; i<overlapPoints.length; i++)
-					//{
-						new R.circle(click.clientX, click.clientY, 7).attr({fill: "#C00", "fill-opacity": 1, "stroke-width": 2, stroke: "#FFF"});
-					//}
+					// for(i=0; i<overlapPoints.length; i++)
+					// {
+						// intu = section(overlapPoints[i][0], overlapOrigin[0], overlapOrigin[1],overlap[0],overlap[1]);
+						// intv = section(overlapPoints[i][1], overlapOrigin[0], overlapOrigin[1],overlap[4],overlap[5]);
+						
+						// diffIntU = differenceTwoPoints(overlapOrigin[0], overlapOrigin[1], intu[0], intu[1]);
+						// diffIntV = differenceTwoPoints(overlapOrigin[0], overlapOrigin[1], intv[0], intv[1]);
+						
+						// var angleU = getAngleTwoPoints (overlapOrigin[0], overlapOrigin[1], overlap[0], overlap[1]);
+						// var angleV = getAngleTwoPoints (overlapOrigin[0], overlapOrigin[1], overlap[4], overlap[5]);
+						
+						// var angleOP = Math.tan(diffIntV/diffIntU) + angleU;
+						
+						
+						// var diffOP = Math.sqrt(Math.pow(intu,2)+Math.pow(intv,2));
+						
+						
+						
+						// overlapCircles[i].attr({cx: (overlapOrigin[0] + (intu[0]-overlapOrigin[0]) + (intv[0]-overlapOrigin[0])) , cy: (overlapOrigin[1] + (intu[1]-overlapOrigin[1]) + (intv[1]-overlapOrigin[1])) });
+						//overlapCircles[i].attr({cx: intu[0], cy: intu[1]});
+					
+					// }
 				}
 				
                 R.set(circle1, circle2).drag(move, start, up);
 				
+				overlapPath.click(doubleclick);
 				circle1.drag(move, start, up);
 				circle2.drag(move, start, up);
-				overlapPath.dblclick(doubleclick);
+
+				
 			}
 			
 			function setOrigin()
 			{
 				overlapOrigin = lineIntersection(overlap[0],overlap[1],overlap[2],overlap[3],overlap[4],overlap[5],overlap[6],overlap[7]);
+			}
+			
+			function section(m, x0, y0, x1, y1)
+			{
+				var n = 1-m;
+				return[((m*x1)+(n*x0)/(m+n)) , ((m*y1)+(n*y0)/(m+n))]
 			}
 
 			function differenceTwoPoints(x0, y0, x1, y1)
@@ -97,8 +156,46 @@
 				var diffAB = differenceTwoPoints(x0, y0, x1, y1);
 				var diffAP = differenceTwoPoints(x0, y0, xP, yP);
 				
+				if(diffAP>diffAB)
+				{
+				return 1;
+				}
 				
 				return diffAP/diffAB;
+			}
+			
+			function findPointOnLinePerpendicularY(Ax,Ay,Bx,By,Cx,Cy)
+			{
+				var angleAB = getAngleTwoPoints (Ax, Ay, Bx, By);
+				var angleCD = oppositeAngle(angleAB);
+				YintersectCD = getPointYOnLineSlope(Cx,Cy,0,angleCD);
+				
+				var D = lineIntersection(Ax,Ay,Bx,By,Cx,Cy,0,YintersectCD);
+				
+				return D;
+			}
+			
+			function findPointOnLinePerpendicularX(Ax,Ay,Bx,By,Cx,Cy)
+			{
+				var angleAB = getAngleTwoPoints (Ax, Ay, Bx, By);
+				var angleCD = oppositeAngle(angleAB);
+				XintersectCD = getPointXOnLineSlope(Cx,Cy,0,angleCD);
+				
+				var D = lineIntersection(Ax,Ay,Bx,By,Cx,Cy,0,XintersectCD);
+				
+				return D;
+			}
+			
+			function getPointYOnLineSlope(Px,Py,x,a)
+			{
+				var m = Math.tan((Math.PI*a)/180);
+				return m*(x-Px)+Py;
+			}
+			
+			function getPointXOnLineSlope(Px,Py,y,a)
+			{
+				var m = Math.tan((Math.PI*a)/180);
+				return ((m*Px)-Py+y)/m;
 			}
 			
 			function lineIntersection(x1, y1, x2, y2, x3, y3, x4, y4)
