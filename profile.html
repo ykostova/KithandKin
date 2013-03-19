@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Mr Blabber - Profile</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="css/layout.css" rel="stylesheet" media="screen">
+<!-- Bootstrap -->
+<link href="css/bootstrap.css" rel="stylesheet" media="screen">
+<link href="css/bootstrap-responsive.css" rel="stylesheet"
+	media="screen">
+</head>
+<body>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="css/layout.css" rel="stylesheet" media="screen">
+<!-- Bootstrap -->
+<link href="css/bootstrap.css" rel="stylesheet" media="screen">
+<link href="css/bootstrap-responsive.css" rel="stylesheet"
+	media="screen">
+<link href="css/line.css" rel="stylesheet" media="screen">
+</head>
+<body>
+	<!-- Header  -->
+	<div class="navbar navbar-inverse navbar-fixed-top">
+		<div class="navbar-inner">
+			<div class="container">
+				<button type="button" class="btn btn-navbar" data-toggle="collapse"
+					data-target=".nav-collapse">
+					<span class="icon-bar"></span> <span class="icon-bar"></span> <span
+						class="icon-bar"></span>
+				</button>
+					<a class="brand" href="index.html">Kith & Kin</a>
+				<div class="nav-collapse collapse">
+					<ul class="nav">
+						<li class="active"><a href="home.html"><i class="icon-user icon-white"></i> MY PROFILE</a></li>
+						<li><a href="#"><i class="icon-search icon-white"></i> SEARCH CONTACTS</a></li>
+						<li><a href="#"><i class="icon-plus-sign icon-white"></i> ADD NEW CONTACT</a></li>
+					</ul>
+				</div>
+				<div class="btn-group  pull-right">
+					<a class="btn btn-info" href="#"><i class="icon-user icon-white"></i> Yolina</a> 
+					<a class="btn btn-info dropdown-toggle" data-toggle="dropdown"
+						href="#"><span class="caret"></span></a>
+					<ul class="dropdown-menu">
+						<li><a href="#"><i class="icon-pencil"></i> Edit</a></li>
+						<li><a href="#"><i class="icon-book"></i> Albums</a></li>
+						<li><a href="#"><i class="icon-picture"></i> Add Picture</a></li>
+						<li><a href="#"><i class="icon-search"></i> Search</a></li>
+						<li class="divider"></li>
+						<li><a href="#"><i class="icon-off"></i> Logout</a></li>
+					</ul>
+				</div>
+				<!--/.nav-collapse -->
+			</div>
+		</div>
+	</div>
+	<!-- end Header -->
+	<!-- Content -->
+	<div class="container">
+		<div class="tabbable span10">
+			<!-- Only required for left/right tabs -->
+				<ul class="nav nav-tabs">
+					<li><a href="account.html">Edit Account</a></li>
+					<li class="active"><a class="active" href="profile.html">Edit Profile</a></li>
+				</ul>
+				<div class="tab-content">
+					<div class="tab-pane active span9" id="tab1">
+						<form class="form-horizontal span8" method="post" action="#">
+							<div class="control-group">
+								<label class="control-label" for="inputFirstName">First
+									Name:</label>
+								<div class="controls">
+									<input type="text" id="first_name" name="first_name"
+										placeholder="First Name"
+										value="Yolina">
+								</div>
+							</div>
+							<div class="control-group">
+								<label class="control-label" for="inputLastName">Last
+									Name:</label>
+								<div class="controls">
+									<input type="text" id="last_name" name="last_name"
+										placeholder="Last Name" value="Kostova">
+								</div>
+							</div>
+							<div class="control-group">
+								<label class="control-label" for="inputCity">City:</label>
+								<div class="controls">
+									<input type="text" id="city" name="city" placeholder="City"
+										value="Dundee">
+								</div>
+							</div>
+							<div class="control-group">
+								<label class="control-label" for="Country">Country:</label>
+								<div class="controls">
+										<input type="text" id="city" name="city" placeholder="country"
+										value="United Kingdom">
+								</div>
+							</div>
+							<div class="control-group">
+								<label class="control-label" for="inputCity">DOB:</label>
+								<div class="controls">
+									<input type="text" id="city" name="city" placeholder="DOB"
+										value="21 February 1991">
+								</div>
+							</div>
+							<fieldset class="control-group">
+								<label class="control-label">Phone Number:</label>
+								<div class="controls">
+									<div class="input-prepend">
+										<label class="add-on">+44</label>
+										<input type="text" id="phone_number" name="phone_number"
+											placeholder="Phone Number">
+									</div>
+								</div>
+							</fieldset>
+							<fieldset class="control-group">
+								<label class="control-label">Website:</label>
+								<div class="controls">
+									<div class="input-prepend">
+										<label class="add-on">http://</label> <input type="text"
+											id="website" name="website" placeholder="Website">
+									</div>
+								</div>
+							</fieldset>
+							<fieldset class="control-group">
+								<label class="control-label" for="inputBio">Bio:</label>
+								<div class="controls">
+									<textarea class="input-xlarge" id="bio" name="bio" rows="4"
+										placeholder="Enter something about yourself..."
+										maxlength="160"></textarea>
+								</div>
+							</fieldset>
+
+							<div class="control-group">
+								<div class="controls">
+									<button type="submit" class="btn btn-large btn-primary">Update</button>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- end Content-->
+	<!-- JS Files -->
+	<script src="http://code.jquery.com/jquery.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+</body>
+</html>

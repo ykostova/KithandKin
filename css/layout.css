@@ -11,3 +11,4 @@ a:hover .insideName { color:#000000; font-size:15px;}
 .highlight a:hover  img{ opacity:1;}
 .zoomIN a img{ width:370px; height:370px; opacity:1;}
 .zoomIN a:hover img{ width:600px; height:600px; opacity:1;}
+.img-logo { width:45px; height:35px;}

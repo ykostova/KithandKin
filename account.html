@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Mr Blabber - Profile</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="css/layout.css" rel="stylesheet" media="screen">
+<!-- Bootstrap -->
+<link href="css/bootstrap.css" rel="stylesheet" media="screen">
+<link href="css/bootstrap-responsive.css" rel="stylesheet"
+	media="screen">
+</head>
+<body>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="css/layout.css" rel="stylesheet" media="screen">
+<!-- Bootstrap -->
+<link href="css/bootstrap.css" rel="stylesheet" media="screen">
+<link href="css/bootstrap-responsive.css" rel="stylesheet"
+	media="screen">
+<link href="css/line.css" rel="stylesheet" media="screen">
+</head>
+<body>
+	<!-- Header  -->
+	<div class="navbar navbar-inverse navbar-fixed-top">
+		<div class="navbar-inner">
+			<div class="container">
+				<button type="button" class="btn btn-navbar" data-toggle="collapse"
+					data-target=".nav-collapse">
+					<span class="icon-bar"></span> <span class="icon-bar"></span> <span
+						class="icon-bar"></span>
+				</button>
+					<a class="brand" href="index.html">Kith & Kin</a>
+				<div class="nav-collapse collapse">
+					<ul class="nav">
+						<li class="active"><a href="home.html"><i class="icon-user icon-white"></i> MY PROFILE</a></li>
+						<li><a href="#"><i class="icon-search icon-white"></i> SEARCH CONTACTS</a></li>
+						<li><a href="#"><i class="icon-plus-sign icon-white"></i> ADD NEW CONTACT</a></li>
+					</ul>
+				</div>
+				<div class="btn-group  pull-right">
+					<a class="btn btn-info" href="#"><i class="icon-user icon-white"></i> Yolina</a> 
+					<a class="btn btn-info dropdown-toggle" data-toggle="dropdown"
+						href="#"><span class="caret"></span></a>
+					<ul class="dropdown-menu">
+						<li><a href="#"><i class="icon-pencil"></i> Edit</a></li>
+						<li><a href="#"><i class="icon-book"></i> Albums</a></li>
+						<li><a href="#"><i class="icon-picture"></i> Add Picture</a></li>
+						<li><a href="#"><i class="icon-search"></i> Search</a></li>
+						<li class="divider"></li>
+						<li><a href="#"><i class="icon-off"></i> Logout</a></li>
+					</ul>
+				</div>
+				<!--/.nav-collapse -->
+			</div>
+		</div>
+	</div>
+	<!-- end Header -->
+	<!-- Content -->
+	<div class="container">
+		<div class="tabbable span10">
+			<!-- Only required for left/right tabs -->
+				<ul class="nav nav-tabs">
+					<li class="active"><a href="account.html" class="active">Edit Account</a></li>
+					<li><a href="profile.html">Edit Profile</a></li>
+				</ul>
+				<div class="tab-content">
+					<div class="tab-pane active span9" id="tab1">
+						<form class="form-horizontal span8" method="post" action="#">
+							<div class="control-group">
+								<label class="control-label" for="inputName">Name: </label>
+								<div class="controls">
+									<input type="text" id="name" name="name"
+										placeholder="Name" value="Yolina Kostova">
+								</div>
+							</div>
+							<hr class="line-divider">
+							<div class="control-group">
+								<label class="control-label" for="inputPassword">Old Password:</label>
+								<div class="controls">
+									<input type="password" id="city" name="password" placeholder="Old Password">
+								</div>
+							</div>
+							<div class="control-group">
+								<label class="control-label" for="inputPassword">Confirm Old Password:</label>
+								<div class="controls">
+									<input type="password" id="city" name="con_password" placeholder="Old Password">
+								</div>
+							</div>
+							<hr class="line-divider">
+							<div class="control-group">
+								<label class="control-label" for="inputPassword">New Password:</label>
+								<div class="controls">
+									<input type="password" id="city" name="pass" placeholder="New Password">
+								</div>
+							</div>
+							<div class="control-group">
+								<label class="control-label" for="inputPassword">Confirm New Password:</label>
+								<div class="controls">
+									<input type="password" id="city" name="con_pass" placeholder="New Password">
+								</div>
+							</div>
+							<div class="control-group">
+								<div class="controls">
+									<button type="submit" class="btn btn-large btn-primary">Update</button>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- end Content-->
+	<!-- JS Files -->
+	<script src="http://code.jquery.com/jquery.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+</body>
+</html>
