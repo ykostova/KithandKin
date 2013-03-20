@@ -36,6 +36,9 @@
 			
 				originCircle = R.circle(overlapOrigin[0], overlapOrigin[1], 7).attr({fill: "#C0C", "fill-opacity": 1, "stroke-width": 2, stroke: "#FFF"});
 				
+				friendsText = R.text(circle1x, circle1y+(circle1r + 30), "Friends").attr({fill: "#FFF", "fill-opacity": 1, "font-size": 16});
+				familyText= R.text(circle2x, circle2y+(circle2r + 30), "Family").attr({fill: "#FFF", "fill-opacity": 1, "font-size": 16});
+				
 				overlapCircles = new Array();
 												
 				doubleclick = function (click) {
@@ -89,6 +92,10 @@
 						side1.attr({cx: overlap[6], cy: overlap[7]});
 						
 						originCircle.attr({cx: overlapOrigin[0], cy: overlapOrigin[1]});
+						
+						
+						friendsText.attr({x: circle1.attr('cx'), y: circle1.attr('cy')+(circle1r + 30)});
+						familyText.attr({x: circle2.attr('cx'), y: circle2.attr('cy')+(circle2r + 30)});
 						
 						overlapPath.remove();
 						overlapPath = R.path('M' + overlap[0] + " " + overlap[1] + ' L' + overlap[4] + " " + overlap[5] + ' L' + overlap[2] + " " + overlap[3] + ' L' + overlap[6] + " " + overlap[7] + ' Z').attr({fill: "#000", "fill-opacity": 0, "stroke-width": 2, stroke: "#FFF"});
