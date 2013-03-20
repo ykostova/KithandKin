@@ -27,19 +27,29 @@
 				circle1 = R.circle(circle1x, circle1y, circle1r).attr({fill: "#000", "fill-opacity": 0, "stroke-width": 5, stroke: "#FFF"});
 				circle2 = R.circle(circle2x, circle2y, circle2r).attr({fill: "#000", "fill-opacity": 0, "stroke-width": 5, stroke: "#FFF"});
 				
-				int0 = R.circle(overlap[0], overlap[1], 7).attr({fill: "#C00", "fill-opacity": 1, "stroke-width": 2, stroke: "#FFF"});
-				int1 = R.circle(overlap[2], overlap[3], 7).attr({fill: "#0C0", "fill-opacity": 1, "stroke-width": 2, stroke: "#FFF"});
-				side0 = R.circle(overlap[4], overlap[5], 7).attr({fill: "#00C", "fill-opacity": 1, "stroke-width": 2, stroke: "#FFF"});
-				side1 = R.circle(overlap[6], overlap[7], 7).attr({fill: "#CC0", "fill-opacity": 1, "stroke-width": 2, stroke: "#FFF"});
+				int0 = R.circle(overlap[0], overlap[1], 7).attr({fill: "#C00", "fill-opacity": 0, "stroke-width": 0, stroke: "#FFF"});
+				int1 = R.circle(overlap[2], overlap[3], 7).attr({fill: "#0C0", "fill-opacity": 0, "stroke-width": 0, stroke: "#FFF"});
+				side0 = R.circle(overlap[4], overlap[5], 7).attr({fill: "#00C", "fill-opacity": 0, "stroke-width": 0, stroke: "#FFF"});
+				side1 = R.circle(overlap[6], overlap[7], 7).attr({fill: "#CC0", "fill-opacity": 0, "stroke-width": 0, stroke: "#FFF"});
 				
-				overlapPath = R.path('M' + overlap[0] + " " + overlap[1] + ' L' + overlap[4] + " " + overlap[5] + ' L' + overlap[2] + " " + overlap[3] + ' L' + overlap[6] + " " + overlap[7] + ' Z').attr({fill: "#000", "fill-opacity": 0, "stroke-width": 2, stroke: "#FFF"});
+				overlapPath = R.path('M' + overlap[0] + " " + overlap[1] + ' L' + overlap[4] + " " + overlap[5] + ' L' + overlap[2] + " " + overlap[3] + ' L' + overlap[6] + " " + overlap[7] + ' Z').attr({fill: "#000", "fill-opacity": 0, "stroke-width": 0, stroke: "#FFF"});
 			
-				originCircle = R.circle(overlapOrigin[0], overlapOrigin[1], 7).attr({fill: "#C0C", "fill-opacity": 1, "stroke-width": 2, stroke: "#FFF"});
+				originCircle = R.circle(overlapOrigin[0], overlapOrigin[1], 7).attr({fill: "#C0C", "fill-opacity": 0, "stroke-width": 0, stroke: "#FFF"});
 				
 				friendsText = R.text(circle1x, circle1y+(circle1r + 30), "Friends").attr({fill: "#FFF", "fill-opacity": 1, "font-size": 16});
 				familyText= R.text(circle2x, circle2y+(circle2r + 30), "Family").attr({fill: "#FFF", "fill-opacity": 1, "font-size": 16});
-				
+
 				overlapCircles = new Array();
+				
+				overlapPoints.push([0.2, 0.7]);
+				overlapCircles.push(R.circle(0,0,7).attr({fill: "#C00", "fill-opacity": 1, "stroke-width": 2, stroke: "#FFF"}));
+				overlapPoints.push([-0.13, 0.49]);
+				overlapCircles.push(R.circle(0,0,7).attr({fill: "#00C", "fill-opacity": 1, "stroke-width": 2, stroke: "#FFF"}));
+				overlapPoints.push([0.3, -0.7]);
+				overlapCircles.push(R.circle(0,0,7).attr({fill: "#0C0", "fill-opacity": 1, "stroke-width": 2, stroke: "#FFF"}));
+				overlapPoints.push([-0.2, -0.47]);
+				overlapCircles.push(R.circle(0,0,7).attr({fill: "#C0C", "fill-opacity": 1, "stroke-width": 2, stroke: "#FFF"}));
+				
 												
 				doubleclick = function (click) {
 					
@@ -50,32 +60,32 @@
 					this.ox = this.attr("cx");
 					this.oy = this.attr("cy");
 
-					if(Raphael.isPointInsidePath(overlapPath.attrs.path,x,y))
-					{
-						disableDrag=true;
+					// if(Raphael.isPointInsidePath(overlapPath.attrs.path,x,y))
+					// {
+						// disableDrag=true;
 						
-						newpointX = x;
-						newpointY = y;
+						// newpointX = x;
+						// newpointY = y;
 						
 
-						var pointUcoord = findPointOnLinePerpendicularY(overlapOrigin[0], overlapOrigin[1],overlap[0],overlap[1],x,y);
-						var pointVcoord = findPointOnLinePerpendicularX(overlapOrigin[0], overlapOrigin[1],overlap[4],overlap[5],x,y);
-						var ratioU = getRatio(overlapOrigin[0], overlapOrigin[1],overlap[0],overlap[1],pointUcoord[0],pointUcoord[1]);
-						var ratioV = getRatio(overlapOrigin[0], overlapOrigin[1],overlap[4],overlap[5],pointVcoord[0],pointVcoord[1]);
+						// var pointUcoord = findPointOnLinePerpendicularY(overlapOrigin[0], overlapOrigin[1],overlap[0],overlap[1],x,y);
+						// var pointVcoord = findPointOnLinePerpendicularX(overlapOrigin[0], overlapOrigin[1],overlap[4],overlap[5],x,y);
+						// var ratioU = getRatio(overlapOrigin[0], overlapOrigin[1],overlap[0],overlap[1],pointUcoord[0],pointUcoord[1]);
+						// var ratioV = getRatio(overlapOrigin[0], overlapOrigin[1],overlap[4],overlap[5],pointVcoord[0],pointVcoord[1]);
 						
-						if(x<overlapOrigin[0])
-						{
-							ratioU = -ratioU;
-						}
+						// if(x<overlapOrigin[0])
+						// {
+							// ratioU = -ratioU;
+						// }
 						
-						if(y<overlapOrigin[1])
-						{
-							ratioV = -ratioV;
-						}
+						// if(y<overlapOrigin[1])
+						// {
+							// ratioV = -ratioV;
+						// }
 						
-						overlapPoints.push([ratioU, ratioV]);
-						overlapCircles.push(R.circle(0,0,7));
-					}
+						// overlapPoints.push([ratioU, ratioV]);
+						// overlapCircles.push(R.circle(0,0,7));
+					// }
                 },
                 move = function (dx, dy) {
 					if(disableDrag==false)
@@ -98,7 +108,7 @@
 						familyText.attr({x: circle2.attr('cx'), y: circle2.attr('cy')+(circle2r + 30)});
 						
 						overlapPath.remove();
-						overlapPath = R.path('M' + overlap[0] + " " + overlap[1] + ' L' + overlap[4] + " " + overlap[5] + ' L' + overlap[2] + " " + overlap[3] + ' L' + overlap[6] + " " + overlap[7] + ' Z').attr({fill: "#000", "fill-opacity": 0, "stroke-width": 2, stroke: "#FFF"});
+						overlapPath = R.path('M' + overlap[0] + " " + overlap[1] + ' L' + overlap[4] + " " + overlap[5] + ' L' + overlap[2] + " " + overlap[3] + ' L' + overlap[6] + " " + overlap[7] + ' Z').attr({fill: "#000", "fill-opacity": 0, "stroke-width": 0, stroke: "#FFF"});
 						this.toFront();
 						overlapPath.toBack();
 						drawPoints();
@@ -109,28 +119,28 @@
                 };
 
 				drawPoints = function() {
-					// for(i=0; i<overlapPoints.length; i++)
-					// {
-						// intu = section(overlapPoints[i][0], overlapOrigin[0], overlapOrigin[1],overlap[0],overlap[1]);
-						// intv = section(overlapPoints[i][1], overlapOrigin[0], overlapOrigin[1],overlap[4],overlap[5]);
+					for(i=0; i<overlapPoints.length; i++)
+					{
+						intu = section(overlapPoints[i][0], overlapOrigin[0], overlapOrigin[1],overlap[0],overlap[1]);
+						intv = section(overlapPoints[i][1], overlapOrigin[0], overlapOrigin[1],overlap[4],overlap[5]);
 						
-						// diffIntU = differenceTwoPoints(overlapOrigin[0], overlapOrigin[1], intu[0], intu[1]);
-						// diffIntV = differenceTwoPoints(overlapOrigin[0], overlapOrigin[1], intv[0], intv[1]);
+						diffIntU = differenceTwoPoints(overlapOrigin[0], overlapOrigin[1], intu[0], intu[1]);
+						diffIntV = differenceTwoPoints(overlapOrigin[0], overlapOrigin[1], intv[0], intv[1]);
 						
-						// var angleU = getAngleTwoPoints (overlapOrigin[0], overlapOrigin[1], overlap[0], overlap[1]);
-						// var angleV = getAngleTwoPoints (overlapOrigin[0], overlapOrigin[1], overlap[4], overlap[5]);
+						var angleU = getAngleTwoPoints (overlapOrigin[0], overlapOrigin[1], overlap[0], overlap[1]);
+						var angleV = getAngleTwoPoints (overlapOrigin[0], overlapOrigin[1], overlap[4], overlap[5]);
 						
-						// var angleOP = Math.tan(diffIntV/diffIntU) + angleU;
-						
-						
-						// var diffOP = Math.sqrt(Math.pow(intu,2)+Math.pow(intv,2));
+						var angleOP = Math.tan(diffIntV/diffIntU) + angleU;
 						
 						
+						var diffOP = Math.sqrt(Math.pow(intu,2)+Math.pow(intv,2));
 						
-						// overlapCircles[i].attr({cx: (overlapOrigin[0] + (intu[0]-overlapOrigin[0]) + (intv[0]-overlapOrigin[0])) , cy: (overlapOrigin[1] + (intu[1]-overlapOrigin[1]) + (intv[1]-overlapOrigin[1])) });
-						//overlapCircles[i].attr({cx: intu[0], cy: intu[1]});
+						
+						
+						overlapCircles[i].attr({cx: (overlapOrigin[0] + (intu[0]-overlapOrigin[0]) + (intv[0]-overlapOrigin[0])) , cy: (overlapOrigin[1] + (intu[1]-overlapOrigin[1]) + (intv[1]-overlapOrigin[1])) });
+						//overlapCircles[i].attr({cx: intu[0], cy: intv[1]});
 					
-					// }
+					}
 				}
 				
                 R.set(circle1, circle2).drag(move, start, up);
@@ -203,6 +213,23 @@
 			{
 				var m = Math.tan((Math.PI*a)/180);
 				return ((m*Px)-Py+y)/m;
+			}
+			
+			function lineIntersection(x1, y1, x2, y2, x3, y3, x4, y4)
+			{
+				var bx = x2 - x1;
+				var by = y2 - y1;
+				var dx = x4 - x3;
+				var dy = y4 - y3; 
+				var b_dot_d_perp = bx*dy - by*dx;
+				if(b_dot_d_perp == 0) {
+					return false;
+				}
+				var cx = x3-x1; 
+				var cy = y3-y1;
+				var t = (cx*dy - cy*dx) / b_dot_d_perp; 
+			 
+			  return [x1+t*bx, y1+t*by]; 
 			}
 			
 			function lineIntersection(x1, y1, x2, y2, x3, y3, x4, y4)
