@@ -40,15 +40,20 @@
 				familyText= R.text(circle2x, circle2y+(circle2r + 30), "Family").attr({fill: "#FFF", "fill-opacity": 1, "font-size": 16});
 
 				overlapCircles = new Array();
+				overlapLabels = new Array();
 				
-				overlapPoints.push([0.8, 0.1]);
+				overlapPoints.push([0.6, 0.1]);
 				overlapCircles.push(R.circle(0,0,7).attr({fill: "#C00", "fill-opacity": 1, "stroke-width": 2, stroke: "#FFF"}));
 				overlapPoints.push([-0.13, 0.49]);
 				overlapCircles.push(R.circle(0,0,7).attr({fill: "#00C", "fill-opacity": 1, "stroke-width": 2, stroke: "#FFF"}));
-				overlapPoints.push([0.3, -0.7]);
+				overlapPoints.push([0.3, -0.6]);
 				overlapCircles.push(R.circle(0,0,7).attr({fill: "#0C0", "fill-opacity": 1, "stroke-width": 2, stroke: "#FFF"}));
 				overlapPoints.push([-0.2, -0.3]);
 				overlapCircles.push(R.circle(0,0,7).attr({fill: "#C0C", "fill-opacity": 1, "stroke-width": 2, stroke: "#FFF"}));
+				overlapLabels.push(R.text(overlapPoints[0][0],overlapPoints[0][1]+20,"Robb").attr({fill: "#FFF", "fill-opacity": 1, "font-size": 10}));
+				overlapLabels.push(R.text(overlapPoints[1][0],overlapPoints[1][1]+20,"Jon").attr({fill: "#FFF", "fill-opacity": 1, "font-size": 10}));
+				overlapLabels.push(R.text(overlapPoints[2][0],overlapPoints[2][1]+20,"Bran").attr({fill: "#FFF", "fill-opacity": 1, "font-size": 10}));
+				overlapLabels.push(R.text(overlapPoints[3][0],overlapPoints[3][1]+20,"Rickon").attr({fill: "#FFF", "fill-opacity": 1, "font-size": 10}));
 				
 				
 				doubleclick = function (click) {
@@ -112,6 +117,7 @@
 						this.toFront();
 						overlapPath.toBack();
 						drawPoints();
+						drawLabels();
 					}
                 },
                 up = function () {
@@ -143,6 +149,31 @@
 					}
 				}
 				
+				drawLabels = function() {
+					for(i=0; i<overlapPoints.length; i++)
+					{
+						intu = section(overlapPoints[i][0], overlapOrigin[0], overlapOrigin[1],overlap[0],overlap[1]);
+						intv = section(overlapPoints[i][1], overlapOrigin[0], overlapOrigin[1],overlap[4],overlap[5]);
+						
+						diffIntU = differenceTwoPoints(overlapOrigin[0], overlapOrigin[1], intu[0], intu[1]);
+						diffIntV = differenceTwoPoints(overlapOrigin[0], overlapOrigin[1], intv[0], intv[1]);
+						
+						var angleU = getAngleTwoPoints (overlapOrigin[0], overlapOrigin[1], overlap[0], overlap[1]);
+						var angleV = getAngleTwoPoints (overlapOrigin[0], overlapOrigin[1], overlap[4], overlap[5]);
+						
+						var angleOP = Math.tan(diffIntV/diffIntU) + angleU;
+						
+						
+						var diffOP = Math.sqrt(Math.pow(intu,2)+Math.pow(intv,2));
+						
+						
+						
+						overlapLabels[i].attr({x: (overlapOrigin[0] + (intu[0]-overlapOrigin[0]) + (intv[0]-overlapOrigin[0])) , y: (overlapOrigin[1] + (intu[1]-overlapOrigin[1]) + (intv[1]-overlapOrigin[1]) + 20) });
+						//overlapCircles[i].attr({cx: intu[0], cy: intv[1]});
+					
+					}
+				}
+				
                 R.set(circle1, circle2).drag(move, start, up);
 				
 				overlapPath.click(doubleclick);
@@ -150,6 +181,7 @@
 				circle2.drag(move, start, up);
 
 				drawPoints();
+				drawLabels();
 				
 			}
 			
