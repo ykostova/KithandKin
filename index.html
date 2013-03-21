@@ -1,5 +1,11 @@
 <!DOCTYPE html>
 <html>
+<head>
+<title>Kith & Kin</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<
+<!DOCTYPE html>
+<html>
 	<head>
 		<title>Kith & Kin</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,6 +17,8 @@
 		<link href="css/bootstrap.css" rel="stylesheet" media="screen">
 		<link href="css/bootstrap-responsive.css" rel="stylesheet" media="screen">
 		<link href="css/line.css" rel="stylesheet" media="screen">
+		<link href="css/colorbox.css" rel="stylesheet" media="screen">
+		<link href="img/favicon.png" rel="icon" type="image/png">
 <script type="text/javascript">
 var circle1x=850,circle1y=280,circle1r=250,circle2x=550,circle2y=280,circle2r=250,overlap=calculateOverlap(circle1x,circle1y,circle1r,circle2x,circle2y,circle2r),circle1coords,circle2coords,overlapOrigin,overlapPoints=[],circle1Points=[],circle2Points=[],disableDrag=!1;
 window.onload=function(){setOrigin();var a=Raphael("holder",$(document).width()-20,$(document).height()-20);circle1=a.circle(circle1x,circle1y,circle1r).attr({fill:"#000","fill-opacity":0,"stroke-width":5,stroke:"#000"});circle2=a.circle(circle2x,circle2y,circle2r).attr({fill:"#000","fill-opacity":0,"stroke-width":5,stroke:"#000"});int0=a.circle(overlap[0],overlap[1],7).attr({fill:"#C00","fill-opacity":0,"stroke-width":0,stroke:"#000"});int1=a.circle(overlap[2],overlap[3],7).attr({fill:"#0C0","fill-opacity":0,
@@ -42,9 +50,7 @@ function getPointOnLineY(a,d,b,c,e){b=getSlope(a,d,b,c);a=getYIntersect(a,d,b);r
 function calculateOverlap(a,d,b,c,e,f){var g,h,j,k;k=[];k=intersection(a,d,b,c,e,f);g=k[0];j=k[1];h=k[2];k=k[3];deltaY0=e-d;deltaX0=c-a;deltaY1=d-e;deltaX1=a-c;theta0=Math.atan2(deltaY0,deltaX0);theta1=Math.atan2(deltaY1,deltaX1);a+=b*Math.cos(theta0);d+=b*Math.sin(theta0);c+=f*Math.cos(theta1);e+=f*Math.sin(theta1);f=[];f[0]=g;f[1]=h;f[2]=j;f[3]=k;f[4]=a;f[5]=d;f[6]=c;f[7]=e;return f}
 function intersection(a,d,b,c,e,f){var g;c-=a;g=e-d;e=Math.sqrt(g*g+c*c);if(e>b+f||e<Math.abs(b-f))return!1;f=(b*b-f*f+e*e)/(2*e);a+=c*f/e;d+=g*f/e;b=Math.sqrt(b*b-f*f);g=-g*(b/e);c*=b/e;return[a+g,a-g,d+c,d-c]};
 		</script>
-	</head>
-	
-	
+</head>
 <body>
 	<!-- Header  -->
 	<div class="navbar navbar-inverse navbar-fixed-top">
@@ -55,12 +61,13 @@ function intersection(a,d,b,c,e,f){var g;c-=a;g=e-d;e=Math.sqrt(g*g+c*c);if(e>b+
 					<span class="icon-bar"></span> <span class="icon-bar"></span> <span
 						class="icon-bar"></span>
 				</button>
-				<a class="brand" href="#">Kith & Kin</a>
+				<a class="brand" href="index.html"><img src="./img/LOGO2.png" class="logo"> Kith & Kin</a>
 				<div class="nav-collapse collapse">
 					<ul class="nav">
-						<li class="active"><a href="#"><i class="icon-user icon-white"></i> MY PROFILE</a></li>
-						<li><a href="#"><i class="icon-search icon-white"></i> SEARCH CONTACTS</a></li>
-						<li><a href="#"><i class="icon-plus-sign icon-white"></i> ADD NEW CONTACT</a></li>
+						<li class="active"><a href="home.html"><i class="icon-user icon-white"></i> MY PROFILE</a></li>
+						<li><a href="searchContacts.html"><i class="icon-search icon-white"></i> SEARCH CONTACTS</a></li>
+						<li><a href="search.html"><i class="icon-plus-sign icon-white"></i> ADD NEW CONTACT</a></li>
+						<li><a href="faq.html"><i class="icon-question-sign icon-white"></i> FAQ</a></li>
 					</ul>
 				</div>
 				<div class="btn-group  pull-right">
@@ -68,10 +75,11 @@ function intersection(a,d,b,c,e,f){var g;c-=a;g=e-d;e=Math.sqrt(g*g+c*c);if(e>b+
 					<a class="btn btn-info dropdown-toggle" data-toggle="dropdown"
 						href="#"><span class="caret"></span></a>
 					<ul class="dropdown-menu">
-						<li><a href="#"><i class="icon-pencil"></i> Edit</a></li>
-						<li><a href="#"><i class="icon-book"></i> Albums</a></li>
-						<li><a href="#"><i class="icon-picture"></i> Add Picture</a></li>
-						<li><a href="#"><i class="icon-search"></i> Search</a></li>
+						<li><a href="profile.html"><i class="icon-pencil"></i> Edit</a></li>
+						<li><a href="home.html"><i class="icon-book"></i> Albums</a></li>
+						<li><a href="addPicture.html"><i class="icon-picture"></i> Add Picture</a></li>
+						<li><a href="searchContacts.html"><i class="icon-search"></i> Search Contacts</a></li>
+						<li><a href="search.html"><i class="icon-plus-sign"></i> Add Contact</a></li>
 						<li class="divider"></li>
 						<li><a href="#"><i class="icon-off"></i> Logout</a></li>
 					</ul>
