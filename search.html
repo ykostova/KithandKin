@@ -9,6 +9,7 @@
 <link href="css/bootstrap-responsive.css" rel="stylesheet"
 	media="screen">
 <link href="css/line.css" rel="stylesheet" media="screen">
+<link href="img/favicon.png" rel="icon" type="image/png">
 </head>
 <body>
 	<!-- Header  -->
@@ -20,12 +21,13 @@
 					<span class="icon-bar"></span> <span class="icon-bar"></span> <span
 						class="icon-bar"></span>
 				</button>
-					<a class="brand" href="index.html">Kith & Kin</a>
+				<a class="brand" href="index.html"><img src="./img/LOGO2.png" class="logo"> Kith & Kin</a>
 				<div class="nav-collapse collapse">
 					<ul class="nav">
-						<li class="active"><a href="home.html"><i class="icon-user icon-white"></i> MY PROFILE</a></li>
-						<li><a href="#"><i class="icon-search icon-white"></i> SEARCH CONTACTS</a></li>
-						<li><a href="#"><i class="icon-plus-sign icon-white"></i> ADD NEW CONTACT</a></li>
+						<li><a href="home.html"><i class="icon-user icon-white"></i> MY PROFILE</a></li>
+						<li><a href="searchContacts.html"><i class="icon-search icon-white"></i> SEARCH CONTACTS</a></li>
+						<li class="active"><a href="search.html"><i class="icon-plus-sign icon-white"></i> ADD NEW CONTACT</a></li>
+						<li><a href="faq.html"><i class="icon-question-sign icon-white"></i> FAQ</a></li>
 					</ul>
 				</div>
 				<div class="btn-group  pull-right">
@@ -33,10 +35,11 @@
 					<a class="btn btn-info dropdown-toggle" data-toggle="dropdown"
 						href="#"><span class="caret"></span></a>
 					<ul class="dropdown-menu">
-						<li><a href="#"><i class="icon-pencil"></i> Edit</a></li>
-						<li><a href="#"><i class="icon-book"></i> Albums</a></li>
-						<li><a href="#"><i class="icon-picture"></i> Add Picture</a></li>
-						<li><a href="#"><i class="icon-search"></i> Search</a></li>
+						<li><a href="profile.html"><i class="icon-pencil"></i> Edit</a></li>
+						<li><a href="home.html"><i class="icon-book"></i> Albums</a></li>
+						<li><a href="addPicture.html"><i class="icon-picture"></i> Add Picture</a></li>
+						<li><a href="searchContacts.html"><i class="icon-search"></i> Search Contacts</a></li>
+						<li><a href="search.html"><i class="icon-plus-sign"></i> Add Contact</a></li>
 						<li class="divider"></li>
 						<li><a href="#"><i class="icon-off"></i> Logout</a></li>
 					</ul>
@@ -53,24 +56,25 @@
 				<img src="./img/accountpic.png" class="img-polaroid">
 				<ul class="nav">
 						<li><br></li>
-						<li class="active">Yolina Kostova</li>
+						<li><strong>Yolina Kostova</strong></li>
 						<li><hr class="line-divider"/></li>
-						<li>DOB: 21 February 1991</li>
+						<li><strong>DOB:</strong><br/><br/> 21 February 1991</li>
 						<li><hr class="line-divider"/></li>
-						<li>About Me: I am .........</li>
+						<li><strong>About Me:</strong><br/><br/> I am .........</li>
 						<li><hr class="line-divider"/></li>
 				</ul>
 				<div class="control-group">
-					<div class="controls">
+					<div class="controls center">
 						<button type="submit" onClick="parent.location='profile.html'" class="btn btn-large btn-primary">Edit Profile</button>
 					</div>
 				</div>
 			</div>
 			<!--/.well -->
 		</div>
-		<div class="span9">
+		<div class="span9 top-margin">
 				<div class="span8">
-					<form class="input span6 pull-right" method="post" action="./Search">
+					<form class="input span6 pull-right" method="post" action="#">
+						<legend class="text-center">Add New Contact</legend>
 						<input class="input-large" id="appendedInputButtons" type="text" placeholder="Search"  name="searchTerm">
 						<button class="btn btn-primary" type="submit">Search</button>
 						<div class="span2 pull-right">

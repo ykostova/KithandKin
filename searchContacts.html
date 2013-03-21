@@ -24,8 +24,8 @@
 				<a class="brand" href="index.html"><img src="./img/LOGO2.png" class="logo"> Kith & Kin</a>
 				<div class="nav-collapse collapse">
 					<ul class="nav">
-						<li class="active"><a href="home.html"><i class="icon-user icon-white"></i> MY PROFILE</a></li>
-						<li><a href="searchContacts.html"><i class="icon-search icon-white"></i> SEARCH CONTACTS</a></li>
+						<li><a href="home.html"><i class="icon-user icon-white"></i> MY PROFILE</a></li>
+						<li class="active"><a href="searchContacts.html"><i class="icon-search icon-white"></i> SEARCH CONTACTS</a></li>
 						<li><a href="search.html"><i class="icon-plus-sign icon-white"></i> ADD NEW CONTACT</a></li>
 						<li><a href="faq.html"><i class="icon-question-sign icon-white"></i> FAQ</a></li>
 					</ul>
@@ -50,58 +50,43 @@
 	</div>
 	<!-- end Header -->
 	<!-- Content -->
-	<div class="container top-margin">
-		<div class="tabbable span7 offset3">
-			<!-- Only required for left/right tabs -->
-				<ul class="nav nav-tabs">
-					<li class="active"><a href="account.html" class="active">Edit Account</a></li>
-					<li><a href="profile.html">Edit Profile</a></li>
+	<div class="container">
+		<div class="span2">
+			<div class="sidebar-nav affix span2">
+				<img src="./img/accountpic.png" class="img-polaroid">
+				<ul class="nav">
+						<li><br></li>
+						<li><strong>Yolina Kostova</strong></li>
+						<li><hr class="line-divider"/></li>
+						<li><strong>DOB:</strong><br/><br/> 21 February 1991</li>
+						<li><hr class="line-divider"/></li>
+						<li><strong>About Me:</strong><br/><br/> I am .........</li>
+						<li><hr class="line-divider"/></li>
 				</ul>
-				<div class="tab-content">
-					<div class="tab-pane active span6" id="tab1">
-						<form class="form-horizontal span5" method="post" action="#">
-							<div class="control-group">
-								<label class="control-label" for="inputName">Name: </label>
-								<div class="controls">
-									<input type="text" id="name" name="name"
-										placeholder="Name" value="Yolina Kostova">
-								</div>
-							</div>
-							<hr class="line-divider">
-							<div class="control-group">
-								<label class="control-label" for="inputPassword">Old Password:</label>
-								<div class="controls">
-									<input type="password" id="city" name="password" placeholder="Old Password">
-								</div>
-							</div>
-							<div class="control-group">
-								<label class="control-label" for="inputPassword">Confirm Old Password:</label>
-								<div class="controls">
-									<input type="password" id="city" name="con_password" placeholder="Old Password">
-								</div>
-							</div>
-							<hr class="line-divider">
-							<div class="control-group">
-								<label class="control-label" for="inputPassword">New Password:</label>
-								<div class="controls">
-									<input type="password" id="city" name="pass" placeholder="New Password">
-								</div>
-							</div>
-							<div class="control-group">
-								<label class="control-label" for="inputPassword">Confirm New Password:</label>
-								<div class="controls">
-									<input type="password" id="city" name="con_pass" placeholder="New Password">
-								</div>
-							</div>
-							<div class="control-group">
-								<div class="controls">
-									<button type="submit" class="btn btn-large btn-primary">Update</button>
-								</div>
-							</div>
-						</form>
+				<div class="control-group">
+					<div class="controls center">
+						<button type="submit" onClick="parent.location='profile.html'" class="btn btn-large btn-primary">Edit Profile</button>
 					</div>
 				</div>
 			</div>
+			<!--/.well -->
+		</div>
+		<div class="span9 top-margin">
+				<div class="span8">
+					<form class="input span6 pull-right" method="post" action="#">
+						<legend class="text-center">Search Contacts</legend>
+						<input class="input-large" id="appendedInputButtons" type="text" placeholder="Search"  name="searchTerm">
+						<button class="btn btn-primary" type="submit">Search</button>
+						<div class="span2 pull-right">
+							<label class="checkbox controls"> <input type="checkbox" name="byUsername" checked>
+								By Email
+							</label>
+							<label class="checkbox controls"> <input type="checkbox" name="byName">
+								By Name
+							</label>
+						</div>
+					</form>
+				</div>
 		</div>
 	</div>
 	<!-- end Content-->

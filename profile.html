@@ -1,15 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Mr Blabber - Profile</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link href="css/layout.css" rel="stylesheet" media="screen">
-<!-- Bootstrap -->
-<link href="css/bootstrap.css" rel="stylesheet" media="screen">
-<link href="css/bootstrap-responsive.css" rel="stylesheet"
-	media="screen">
-</head>
-<body>
+<title>Kith & Kin</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link href="css/layout.css" rel="stylesheet" media="screen">
 <!-- Bootstrap -->
@@ -17,6 +9,7 @@
 <link href="css/bootstrap-responsive.css" rel="stylesheet"
 	media="screen">
 <link href="css/line.css" rel="stylesheet" media="screen">
+<link href="img/favicon.png" rel="icon" type="image/png">
 </head>
 <body>
 	<!-- Header  -->
@@ -28,12 +21,13 @@
 					<span class="icon-bar"></span> <span class="icon-bar"></span> <span
 						class="icon-bar"></span>
 				</button>
-					<a class="brand" href="index.html">Kith & Kin</a>
+				<a class="brand" href="index.html"><img src="./img/LOGO2.png" class="logo"> Kith & Kin</a>
 				<div class="nav-collapse collapse">
 					<ul class="nav">
 						<li class="active"><a href="home.html"><i class="icon-user icon-white"></i> MY PROFILE</a></li>
-						<li><a href="#"><i class="icon-search icon-white"></i> SEARCH CONTACTS</a></li>
-						<li><a href="#"><i class="icon-plus-sign icon-white"></i> ADD NEW CONTACT</a></li>
+						<li><a href="searchContacts.html"><i class="icon-search icon-white"></i> SEARCH CONTACTS</a></li>
+						<li><a href="search.html"><i class="icon-plus-sign icon-white"></i> ADD NEW CONTACT</a></li>
+						<li><a href="faq.html"><i class="icon-question-sign icon-white"></i> FAQ</a></li>
 					</ul>
 				</div>
 				<div class="btn-group  pull-right">
@@ -41,10 +35,11 @@
 					<a class="btn btn-info dropdown-toggle" data-toggle="dropdown"
 						href="#"><span class="caret"></span></a>
 					<ul class="dropdown-menu">
-						<li><a href="#"><i class="icon-pencil"></i> Edit</a></li>
-						<li><a href="#"><i class="icon-book"></i> Albums</a></li>
-						<li><a href="#"><i class="icon-picture"></i> Add Picture</a></li>
-						<li><a href="#"><i class="icon-search"></i> Search</a></li>
+						<li><a href="profile.html"><i class="icon-pencil"></i> Edit</a></li>
+						<li><a href="home.html"><i class="icon-book"></i> Albums</a></li>
+						<li><a href="addPicture.html"><i class="icon-picture"></i> Add Picture</a></li>
+						<li><a href="searchContacts.html"><i class="icon-search"></i> Search Contacts</a></li>
+						<li><a href="search.html"><i class="icon-plus-sign"></i> Add Contact</a></li>
 						<li class="divider"></li>
 						<li><a href="#"><i class="icon-off"></i> Logout</a></li>
 					</ul>
@@ -55,16 +50,16 @@
 	</div>
 	<!-- end Header -->
 	<!-- Content -->
-	<div class="container">
-		<div class="tabbable span10">
+	<div class="container top-margin">
+		<div class="tabbable span7 offset3">
 			<!-- Only required for left/right tabs -->
 				<ul class="nav nav-tabs">
 					<li><a href="account.html">Edit Account</a></li>
 					<li class="active"><a class="active" href="profile.html">Edit Profile</a></li>
 				</ul>
 				<div class="tab-content">
-					<div class="tab-pane active span9" id="tab1">
-						<form class="form-horizontal span8" method="post" action="#">
+					<div class="tab-pane active span6" id="tab1">
+						<form class="form-horizontal span5" method="post" action="#">
 							<div class="control-group">
 								<label class="control-label" for="inputFirstName">First
 									Name:</label>
