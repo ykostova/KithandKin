@@ -1,84 +1,121 @@
 <!DOCTYPE html>
 <html>
-<head>
-<title>Kith & Kin</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link href="css/layout.css" rel="stylesheet" media="screen">
-<!-- Bootstrap -->
-<link href="css/bootstrap.css" rel="stylesheet" media="screen">
-<link href="css/bootstrap-responsive.css" rel="stylesheet"
-	media="screen">
-<link href="css/line.css" rel="stylesheet" media="screen">
+	<head>
+		<title>Kith & Kin</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
         <script src="raphael-min.js"></script>
+		<script src="jquery-1.9.1.min.js"></script>
+		<link href="css/layout.css" rel="stylesheet" media="screen">
+		<!-- Bootstrap -->
+		<link href="css/bootstrap.css" rel="stylesheet" media="screen">
+		<link href="css/bootstrap-responsive.css" rel="stylesheet" media="screen">
+		<link href="css/line.css" rel="stylesheet" media="screen">
 <script type="text/javascript">
-				var circle1x = 600;
-				var circle1y = 400;
-				var circle1r = 220;
+				var circle1x = 800;
+				var circle1y = 250;
+				var circle1r = 200;
 				
-				var circle2x = 900;
-				var circle2y = 400;
-				var circle2r = 220;
+				var circle2x = 500;
+				var circle2y = 250;
+				var circle2r = 200;
 				
 				var overlap = calculateOverlap(circle1x, circle1y, circle1r, circle2x, circle2y, circle2r);
+				var circle1coords;
+				var circle2coords;
 				
 				var overlapOrigin;
 				var overlapPoints = new Array();
+				var circle1Points = new Array();
+				var circle2Points = new Array();
 				
 				var disableDrag=false;
-			window.onload = function () {
+				window.onload = function () {
 
 				setOrigin();
 				
-				var R = Raphael("spanjs", $(document).width()-20, $(document).height()-20);
+				var R = Raphael("holder", $(document).width()-20, $(document).height()-20);
 				circle1 = R.circle(circle1x, circle1y, circle1r).attr({fill: "#000", "fill-opacity": 0, "stroke-width": 5, stroke: "#000"});
 				circle2 = R.circle(circle2x, circle2y, circle2r).attr({fill: "#000", "fill-opacity": 0, "stroke-width": 5, stroke: "#000"});
 				
-				//int0 = R.circle(overlap[0], overlap[1], 7).attr({fill: "#C00", "fill-opacity": 1, "stroke-width": 2, stroke: "#000"});
-				//int1 = R.circle(overlap[2], overlap[3], 7).attr({fill: "#0C0", "fill-opacity": 1, "stroke-width": 2, stroke: "#000"});
-				//side0 = R.circle(overlap[4], overlap[5], 7).attr({fill: "#00C", "fill-opacity": 1, "stroke-width": 2, stroke: "#000"});
-				//side1 = R.circle(overlap[6], overlap[7], 7).attr({fill: "#CC0", "fill-opacity": 1, "stroke-width": 2, stroke: "#000"});
+				int0 = R.circle(overlap[0], overlap[1], 7).attr({fill: "#C00", "fill-opacity": 0, "stroke-width": 0, stroke: "#000"});
+				int1 = R.circle(overlap[2], overlap[3], 7).attr({fill: "#0C0", "fill-opacity": 0, "stroke-width": 0, stroke: "#000"});
+				side0 = R.circle(overlap[4], overlap[5], 7).attr({fill: "#00C", "fill-opacity": 0, "stroke-width": 0, stroke: "#000"});
+				side1 = R.circle(overlap[6], overlap[7], 7).attr({fill: "#CC0", "fill-opacity": 0, "stroke-width": 0, stroke: "#000"});
 				
-				//overlapPath = R.path('M' + overlap[0] + " " + overlap[1] + ' L' + overlap[4] + " " + overlap[5] + ' L' + overlap[2] + " " + overlap[3] + ' L' + overlap[6] + " " + overlap[7] + ' Z').attr({fill: "#000", "fill-opacity": 0, "stroke-width": 2, stroke: "#FFF"});
+				overlapPath = R.path('M' + overlap[0] + " " + overlap[1] + ' L' + overlap[4] + " " + overlap[5] + ' L' + overlap[2] + " " + overlap[3] + ' L' + overlap[6] + " " + overlap[7] + ' Z').attr({fill: "#000", "fill-opacity": 0, "stroke-width": 0, stroke: "#000"});
 			
-				//originCircle = R.circle(overlapOrigin[0], overlapOrigin[1], 7).attr({fill: "#C0C", "fill-opacity": 1, "stroke-width": 2, stroke: "#FFF"});
+				originCircle = R.circle(overlapOrigin[0], overlapOrigin[1], 7).attr({fill: "#C0C", "fill-opacity": 0, "stroke-width": 0, stroke: "#000"});
 				
+				friendsText = R.text(circle1x, circle1y+(circle1r + 30), "Baratheon").attr({fill: "#000", "fill-opacity": 1, "font-size": 16});
+				familyText= R.text(circle2x, circle2y+(circle2r + 30), "Lannister").attr({fill: "#000", "fill-opacity": 1, "font-size": 16});
+
 				overlapCircles = new Array();
-												
-				doubleclick = function (click) {
-					
-		
-				}
+				overlapLabels = new Array();
+				circle1Circles = new Array();
+				circle1Labels = new Array();
+				circle2Circles = new Array();
+				circle2Labels = new Array();
+				
+				overlapPoints.push([0.6, 0.1]);
+				overlapPoints.push([-0.13, 0.49]);
+				overlapPoints.push([0.3, -0.6]);
+				overlapCircles.push(R.circle(0,0,7).attr({fill: "#C00", "fill-opacity": 1, "stroke-width": 2, stroke: "#000"}));
+				overlapCircles.push(R.circle(0,0,7).attr({fill: "#00C", "fill-opacity": 1, "stroke-width": 2, stroke: "#000"}));
+				overlapCircles.push(R.circle(0,0,7).attr({fill: "#0C0", "fill-opacity": 1, "stroke-width": 2, stroke: "#000"}));
+				overlapLabels.push(R.text(overlapPoints[0][0],overlapPoints[0][1]+20,"Joffrey").attr({fill: "#000", "fill-opacity": 1, "font-size": 12}));
+				overlapLabels.push(R.text(overlapPoints[1][0],overlapPoints[1][1]+20,"Robert").attr({fill: "#000", "fill-opacity": 1, "font-size": 12}));
+				overlapLabels.push(R.text(overlapPoints[2][0],overlapPoints[2][1]+20,"Cersei").attr({fill: "#000", "fill-opacity": 1, "font-size": 12}));
+				
+				circle1Points.push([0.3,0]);
+				circle1Points.push([0.5,0]);
+				circle1Points.push([0.8,0]);
+				circle1Circles.push(R.circle(0,0,7).attr({fill: "#C00", "fill-opacity": 1, "stroke-width": 2, stroke: "#000"}));
+				circle1Circles.push(R.circle(0,0,7).attr({fill: "#00C", "fill-opacity": 1, "stroke-width": 2, stroke: "#000"}));
+				circle1Circles.push(R.circle(0,0,7).attr({fill: "#0C0", "fill-opacity": 1, "stroke-width": 2, stroke: "#000"}));
+				circle1Labels.push(R.text(overlapPoints[0][0],overlapPoints[0][1]+20,"Tywin").attr({fill: "#000", "fill-opacity": 1, "font-size": 12}));
+				circle1Labels.push(R.text(overlapPoints[1][0],overlapPoints[1][1]+20,"Jaime").attr({fill: "#000", "fill-opacity": 1, "font-size": 12}));
+				circle1Labels.push(R.text(overlapPoints[2][0],overlapPoints[2][1]+20,"Tyrion").attr({fill: "#000", "fill-opacity": 1, "font-size": 12}));
+				circle2Points.push([0.3,0]);
+				circle2Points.push([0.5,0]);
+				circle2Circles.push(R.circle(0,0,7).attr({fill: "#C00", "fill-opacity": 1, "stroke-width": 2, stroke: "#000"}));
+				circle2Circles.push(R.circle(0,0,7).attr({fill: "#00C", "fill-opacity": 1, "stroke-width": 2, stroke: "#000"}));
+				circle2Labels.push(R.text(overlapPoints[0][0],overlapPoints[0][1]+20,"Stannis").attr({fill: "#000", "fill-opacity": 1, "font-size": 12}));
+				circle2Labels.push(R.text(overlapPoints[1][0],overlapPoints[1][1]+20,"Renly").attr({fill: "#000", "fill-opacity": 1, "font-size": 12}));
+				
+				circle1coords = getCircleCoords(circle1.attr('cx'), circle1.attr('cy'), circle1r, circle2.attr('cx'), circle2.attr('cy'), circle2r);
+				circle2coords = getCircleCoords(circle2.attr('cx'), circle2.attr('cy'), circle2r, circle1.attr('cx'), circle1.attr('cy'), circle1r);
 				
                 var start = function (x,y) {
 					this.ox = this.attr("cx");
 					this.oy = this.attr("cy");
 
-					if(Raphael.isPointInsidePath(overlapPath.attrs.path,x,y))
-					{
-						disableDrag=true;
+					// if(Raphael.isPointInsidePath(overlapPath.attrs.path,x,y))
+					// {
+						// disableDrag=true;
 						
-						newpointX = x;
-						newpointY = y;
+						// newpointX = x;
+						// newpointY = y;
 						
 
-						var pointUcoord = findPointOnLinePerpendicularY(overlapOrigin[0], overlapOrigin[1],overlap[0],overlap[1],x,y);
-						var pointVcoord = findPointOnLinePerpendicularX(overlapOrigin[0], overlapOrigin[1],overlap[4],overlap[5],x,y);
-						var ratioU = getRatio(overlapOrigin[0], overlapOrigin[1],overlap[0],overlap[1],pointUcoord[0],pointUcoord[1]);
-						var ratioV = getRatio(overlapOrigin[0], overlapOrigin[1],overlap[4],overlap[5],pointVcoord[0],pointVcoord[1]);
+						// var pointUcoord = findPointOnLinePerpendicularY(overlapOrigin[0], overlapOrigin[1],overlap[0],overlap[1],x,y);
+						// var pointVcoord = findPointOnLinePerpendicularX(overlapOrigin[0], overlapOrigin[1],overlap[4],overlap[5],x,y);
+						// var ratioU = getRatio(overlapOrigin[0], overlapOrigin[1],overlap[0],overlap[1],pointUcoord[0],pointUcoord[1]);
+						// var ratioV = getRatio(overlapOrigin[0], overlapOrigin[1],overlap[4],overlap[5],pointVcoord[0],pointVcoord[1]);
 						
-						if(x<overlapOrigin[0])
-						{
-							ratioU = -ratioU;
-						}
+						// if(x<overlapOrigin[0])
+						// {
+							// ratioU = -ratioU;
+						// }
 						
-						if(y<overlapOrigin[1])
-						{
-							ratioV = -ratioV;
-						}
+						// if(y<overlapOrigin[1])
+						// {
+							// ratioV = -ratioV;
+						// }
 						
-						overlapPoints.push([ratioU, ratioV]);
-						overlapCircles.push(R.circle(0,0,7));
-					}
+						// overlapPoints.push([ratioU, ratioV]);
+						// overlapCircles.push(R.circle(0,0,7));
+					// }
                 },
                 move = function (dx, dy) {
 					if(disableDrag==false)
@@ -89,6 +126,9 @@
 						
 						overlap = calculateOverlap(circle1.attr('cx'), circle1.attr('cy'), circle1r, circle2.attr('cx'), circle2.attr('cy'), circle2r);
 						
+						circle1coords = getCircleCoords(circle1.attr('cx'), circle1.attr('cy'), circle1r, circle2.attr('cx'), circle2.attr('cy'), circle2r);
+						circle2coords = getCircleCoords(circle2.attr('cx'), circle2.attr('cy'), circle2r, circle1.attr('cx'), circle1.attr('cy'), circle1r);
+						
 						int0.attr({cx: overlap[0], cy: overlap[1]});
 						int1.attr({cx: overlap[2], cy: overlap[3]});
 						side0.attr({cx: overlap[4], cy: overlap[5]});
@@ -96,49 +136,188 @@
 						
 						originCircle.attr({cx: overlapOrigin[0], cy: overlapOrigin[1]});
 						
+						
+						friendsText.attr({x: circle1.attr('cx'), y: circle1.attr('cy')+(circle1r + 30)});
+						familyText.attr({x: circle2.attr('cx'), y: circle2.attr('cy')+(circle2r + 30)});
+						
 						overlapPath.remove();
-						overlapPath = R.path('M' + overlap[0] + " " + overlap[1] + ' L' + overlap[4] + " " + overlap[5] + ' L' + overlap[2] + " " + overlap[3] + ' L' + overlap[6] + " " + overlap[7] + ' Z').attr({fill: "#000", "fill-opacity": 0, "stroke-width": 2, stroke: "#FFF"});
+						overlapPath = R.path('M' + overlap[0] + " " + overlap[1] + ' L' + overlap[4] + " " + overlap[5] + ' L' + overlap[2] + " " + overlap[3] + ' L' + overlap[6] + " " + overlap[7] + ' Z').attr({fill: "#000", "fill-opacity": 0, "stroke-width": 0, stroke: "#000"});
 						this.toFront();
 						overlapPath.toBack();
 						drawPoints();
+						drawLabels();
 					}
                 },
                 up = function () {
 					disableDrag=false;
                 };
+				
+				clickTywin = function() {
+					document.getElementById("img").src="./img/tywin.jpg";
+					document.getElementById("name").innerHTML="Tywin Lannister";
+					document.getElementById("bio").innerHTML="Warden of the West, and Lord of Casterly Rock.<br /><br />I have never lost a battle, and don't plan to start now.";
+				}
+				clickJaime = function() {
+					document.getElementById("img").src="./img/jaime.jpg";
+					document.getElementById("name").innerHTML="Jaime Lannister";
+					document.getElementById("bio").innerHTML="Knight of the Kingsguard.  <br /><br />Please stop calling me \"Kingslayer\", it's getting really old.";
+				}
+				clickTyrion = function() {
+					document.getElementById("img").src="./img/tyrion.jpg";
+					document.getElementById("name").innerHTML="Tyrion Lannister";
+					document.getElementById("bio").innerHTML="Son of Tywin.  I enjoy reading, and generally being rather rich.  <br /><br />I am rather short.";
+				}
+				clickStannis = function() {
+					document.getElementById("img").src="./img/stannis.jpg";
+					document.getElementById("name").innerHTML="Stannis Baratheon";
+					document.getElementById("bio").innerHTML="Master of Ships in King's Landing.<br /><br />I reckon something's amiss about Robert's son..";
+				}
+				clickRenly = function() {
+					document.getElementById("img").src="./img/renly.png";
+					document.getElementById("name").innerHTML="Renly Baratheon";
+					document.getElementById("bio").innerHTML="Master of Laws in King's Landing.<br /><br />Loras Tyrell?  Never heard of him..";
+				}
+				clickRobert = function() {
+					document.getElementById("img").src="./img/robert.jpg";
+					document.getElementById("name").innerHTML="Robert Baratheon";
+					document.getElementById("bio").innerHTML="King of the Andals, the Rhoynar and the First Men, Lord of the Seven Kingdoms, Protector of the....oh, enough of this.  <br /><br />More wine!";
+				}
+				clickCersei = function() {
+					document.getElementById("img").src="./img/cersei.jpg";
+					document.getElementById("name").innerHTML="Cersei Lannister";
+					document.getElementById("bio").innerHTML="Queen of the Seven Kingdoms, wife to Robert Baratheon. <br /><br />I literally hate everyone and everything.  My brother Jaime's not bad looking though..";
+				}
+				clickJoffrey = function() {
+					document.getElementById("img").src="./img/joffrey.jpg";
+					document.getElementById("name").innerHTML="Joffrey Baratheon";
+					document.getElementById("bio").innerHTML="Prince and heir to the Seven Kingdoms, son of Robert.<br /><br />Dog, come write this bio for me!  ";
+				}
 
 				drawPoints = function() {
-					// for(i=0; i<overlapPoints.length; i++)
-					// {
-						// intu = section(overlapPoints[i][0], overlapOrigin[0], overlapOrigin[1],overlap[0],overlap[1]);
-						// intv = section(overlapPoints[i][1], overlapOrigin[0], overlapOrigin[1],overlap[4],overlap[5]);
+					for(i=0; i<overlapPoints.length; i++)
+					{
+
 						
-						// diffIntU = differenceTwoPoints(overlapOrigin[0], overlapOrigin[1], intu[0], intu[1]);
-						// diffIntV = differenceTwoPoints(overlapOrigin[0], overlapOrigin[1], intv[0], intv[1]);
+						intu = section(overlapPoints[i][0], overlapOrigin[0], overlapOrigin[1],overlap[0],overlap[1]);
+						intv = section(overlapPoints[i][1], overlapOrigin[0], overlapOrigin[1],overlap[4],overlap[5]);
 						
-						// var angleU = getAngleTwoPoints (overlapOrigin[0], overlapOrigin[1], overlap[0], overlap[1]);
-						// var angleV = getAngleTwoPoints (overlapOrigin[0], overlapOrigin[1], overlap[4], overlap[5]);
+						diffIntU = differenceTwoPoints(overlapOrigin[0], overlapOrigin[1], intu[0], intu[1]);
+						diffIntV = differenceTwoPoints(overlapOrigin[0], overlapOrigin[1], intv[0], intv[1]);
 						
-						// var angleOP = Math.tan(diffIntV/diffIntU) + angleU;
+						var angleU = getAngleTwoPoints (overlapOrigin[0], overlapOrigin[1], overlap[0], overlap[1]);
+						var angleV = getAngleTwoPoints (overlapOrigin[0], overlapOrigin[1], overlap[4], overlap[5]);
 						
-						
-						// var diffOP = Math.sqrt(Math.pow(intu,2)+Math.pow(intv,2));
-						
+						var angleOP = Math.tan(diffIntV/diffIntU) + angleU;
 						
 						
-						// overlapCircles[i].attr({cx: (overlapOrigin[0] + (intu[0]-overlapOrigin[0]) + (intv[0]-overlapOrigin[0])) , cy: (overlapOrigin[1] + (intu[1]-overlapOrigin[1]) + (intv[1]-overlapOrigin[1])) });
-						//overlapCircles[i].attr({cx: intu[0], cy: intu[1]});
+						var diffOP = Math.sqrt(Math.pow(intu,2)+Math.pow(intv,2));
+						
+						
+						
+						overlapCircles[i].attr({cx: (overlapOrigin[0] + (intu[0]-overlapOrigin[0]) + (intv[0]-overlapOrigin[0])) , cy: (overlapOrigin[1] + (intu[1]-overlapOrigin[1]) + (intv[1]-overlapOrigin[1])) });
+						overlapCircles[i].toFront();
+						//overlapCircles[i].attr({cx: intu[0], cy: intv[1]});
+						
+						
+					}
 					
-					// }
+						opp1Coord1 = [circle1.attr('cx')-(circle1coords[0]-circle1.attr('cx')),circle1.attr('cy')-(circle1coords[1]-circle1.attr('cy'))];
+						opp1Coord2 = [circle1.attr('cx')-(circle1coords[2]-circle1.attr('cx')),circle1.attr('cy')-(circle1coords[3]-circle1.attr('cy'))];
+						opp2Coord1 = [circle2.attr('cx')-(circle2coords[0]-circle2.attr('cx')),circle2.attr('cy')-(circle2coords[1]-circle2.attr('cy'))];
+						opp2Coord2 = [circle2.attr('cx')-(circle2coords[2]-circle2.attr('cx')),circle2.attr('cy')-(circle2coords[3]-circle2.attr('cy'))];
+					
+						circle1Circles[0].attr({cx: circle1coords[2] + (circle2coords[2]-circle1coords[2])/1.4, cy: circle1coords[3] + (circle2coords[3]-circle1coords[3])/1.4});
+						circle1Circles[1].attr({cx: circle1coords[2] + (circle2coords[2]-circle1coords[2])/3, cy: circle1coords[3] + (circle2coords[3]-circle1coords[3])/3});
+						circle1Circles[2].attr({cx: circle1coords[0] + (circle2coords[2]-circle1coords[0])/1.5, cy: circle1coords[1] + (circle2coords[3]-circle1coords[1])/1.5});
+						
+						circle1Circles[0].toFront();
+						circle1Circles[1].toFront();
+						circle1Circles[2].toFront();
+						
+						circle1Labels[0].attr({x: circle1coords[2] + (circle2coords[2]-circle1coords[2])/1.4, y: (circle1coords[3] + (circle2coords[3]-circle1coords[3])/1.4)+20});
+						circle1Labels[1].attr({x: circle1coords[2] + (circle2coords[2]-circle1coords[2])/3, y: (circle1coords[3] + (circle2coords[3]-circle1coords[3])/3)+20});
+						circle1Labels[2].attr({x: circle1coords[0] + (circle2coords[2]-circle1coords[0])/1.5, y: (circle1coords[1] + (circle2coords[3]-circle1coords[1])/1.5)+20});
+						
+						circle2Circles[0].attr({cx: opp1Coord2[0] + (opp2Coord2[0]-opp1Coord2[0])/4, cy: opp1Coord2[1] + (opp2Coord2[1]-opp1Coord2[1])/4});
+						circle2Circles[1].attr({cx: opp1Coord2[0] + (opp2Coord2[0]-opp1Coord2[0])/1.5, cy: opp1Coord2[1] + (opp2Coord2[1]-opp1Coord2[1])/1.5});
+						
+						circle2Circles[0].toFront();
+						circle2Circles[1].toFront();
+						
+						circle2Labels[0].attr({x: opp1Coord2[0] + (opp2Coord2[0]-opp1Coord2[0])/4, y: (opp1Coord2[1] + (opp2Coord2[1]-opp1Coord2[1])/4)+20});
+						circle2Labels[1].attr({x: opp1Coord2[0] + (opp2Coord2[0]-opp1Coord2[0])/1.5, y: (opp1Coord2[1] + (opp2Coord2[1]-opp1Coord2[1])/1.5)+20});
+						
+						
+						
+						//circle2Circles[0].attr({cx: opp2Coord1[0] + (opp1Coord2[0]-opp2Coord1[0])/2, cy: opp2Coord1[1] + (opp1Coord2[1]-opp2Coord1[1])/2});
+						//circle2Circles[1].attr({cx: opp2Coord1[0] + (opp1Coord2[0]-opp2Coord1[0])/3, cy: opp2Coord1[1] + (opp1Coord2[1]-opp2Coord1[1])/3});
+						//circle2Circles[2].attr({cx: opp2Coord1[0] + (opp1Coord2[0]-opp2Coord1[0])/1.5, cy: opp2Coord1[1] + (opp1Coord2[1]-opp2Coord1[1])/1.5});
+//		//			for(i=0; i<circle1Points.length; i++)
+		//			{
+		//				opp1Coord1 = [circle1.attr('cx')+(circle1coords[0]-circle1.attr('cx')),circle1.attr('cy')+(circle1coords[1]-circle1.attr('cy'))];
+		//				opp1Coord2 = [circle1.attr('cx')+(circle1coords[1]-circle1.attr('cx')),circle1.attr('cy')+(circle1coords[1]-circle1.attr('cy'))];
+		//				
+		//				intu = section(circle1Points[i][0], circle1x, circle1y, circle1coords[0],opp1Coord1);
+		//				intv = section(circle1Points[i][1], circle1x, circle1y, circle1coords[1],opp1Coord2);
+		//	//			
+		//				
+		//				circle1Circles[0].attr({cx: circle1coords[0] + (circle2coords[0]-circle1coords[0]), cy: circle1coords[1] + (circle2coords[1]-circle1coords[1])});
+		//				//circle1Circles[i].attr({cx: (circle1x + (intu[0]-circle1x) + (intv[0]-circle1x)) , cy: (circle1y + (intu[1]-circle1y) + (intv[1]-circle1y)) });
+		//				//overlapCircles[i].attr({cx: intu[0], cy: intv[1]});
+		//			
+		//			}
+				}
+				
+				drawLabels = function() {
+					for(i=0; i<overlapPoints.length; i++)
+					{
+						intu = section(overlapPoints[i][0], overlapOrigin[0], overlapOrigin[1],overlap[0],overlap[1]);
+						intv = section(overlapPoints[i][1], overlapOrigin[0], overlapOrigin[1],overlap[4],overlap[5]);
+						
+						
+						
+						
+						overlapLabels[i].attr({x: (overlapOrigin[0] + (intu[0]-overlapOrigin[0]) + (intv[0]-overlapOrigin[0])) , y: (overlapOrigin[1] + (intu[1]-overlapOrigin[1]) + (intv[1]-overlapOrigin[1]) + 20) });
+						//overlapCircles[i].attr({cx: intu[0], cy: intv[1]});
+					
+					}
 				}
 				
                 R.set(circle1, circle2).drag(move, start, up);
 				
-				overlapPath.click(doubleclick);
 				circle1.drag(move, start, up);
 				circle2.drag(move, start, up);
-
 				
+				circle1Circles[0].click(clickTywin);
+				circle1Circles[1].click(clickJaime);
+				circle1Circles[2].click(clickTyrion);
+				circle2Circles[0].click(clickStannis);
+				circle2Circles[1].click(clickRenly);
+				overlapCircles[0].click(clickJoffrey);
+				overlapCircles[1].click(clickRobert);
+				overlapCircles[2].click(clickCersei);
+
+				drawPoints();
+				drawLabels();
+				
+			}
+			
+			function getCircleCoords(c1x,c1y,c1r,c2x,c2y,c2r)
+			{
+				angle = getAngleTwoPoints (c1x, c1y, c2x, c2y);
+				oppangle = oppositeAngle(angle);
+				radangle = oppangle * Math.PI / 180;
+				
+				x1 = Math.cos(radangle) * c1r + c1x;
+				y1 = Math.sin(radangle) * c1r + c1y;
+				
+				oppangle = oppositeAngle(oppangle);
+				radangle = oppangle * Math.PI / 180;
+				
+				x2 = Math.cos(radangle) * c1r + c1x;
+				y2 = Math.sin(radangle) * c1r + c1y;
+				
+				return [x1,y1,x2,y2];
 			}
 			
 			function setOrigin()
@@ -202,6 +381,23 @@
 			{
 				var m = Math.tan((Math.PI*a)/180);
 				return ((m*Px)-Py+y)/m;
+			}
+			
+			function lineIntersection(x1, y1, x2, y2, x3, y3, x4, y4)
+			{
+				var bx = x2 - x1;
+				var by = y2 - y1;
+				var dx = x4 - x3;
+				var dy = y4 - y3; 
+				var b_dot_d_perp = bx*dy - by*dx;
+				if(b_dot_d_perp == 0) {
+					return false;
+				}
+				var cx = x3-x1; 
+				var cy = y3-y1;
+				var t = (cx*dy - cy*dx) / b_dot_d_perp; 
+			 
+			  return [x1+t*bx, y1+t*by]; 
 			}
 			
 			function lineIntersection(x1, y1, x2, y2, x3, y3, x4, y4)
@@ -361,6 +557,8 @@
 		
 		</script>
 	</head>
+	
+	
 <body>
 	<!-- Header  -->
 	<div class="navbar navbar-inverse navbar-fixed-top">
@@ -399,7 +597,20 @@
 	<!-- end Header -->
 	<!-- Content -->
 	<div class="container">
-		<div id="spanjs">
+			<div class="span2">
+			<div class="sidebar-nav affix span2">
+				<img src="./img/accountpic.png" id="img">
+				<ul class="nav">
+						<li><br></li>
+						<li id="name" class="active">Yolina Kostova</li>
+						<li><hr class="line-divider"/></li>
+						<li id="bio">About Me: I am .........</li>
+						<li><hr class="line-divider"/></li>
+				</ul>
+			</div>
+			<!--/.well -->
+		</div>
+		<div id="holder">
 		
 		</div>
 	</div>
