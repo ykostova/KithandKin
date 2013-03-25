@@ -1,0 +1,13 @@
+body { padding-top: 60px;}
+.float-left { float:left;}
+.left-margin { margin-left: 10px;}
+.register .left { float: left;}
+.tweet-controlls a {margin: 0 10px 0 10px;}
+.zoomME a img{ width:72px; height:72px; opacity:0.7;}
+.zoomME a:hover img{ width:100px; height:100px; opacity:1;}
+a .insideName { color:#00FF00; font-size:10px;}
+a:hover .insideName { color:#000000; font-size:15px;}
+.highlight a img{ opacity:0.7;}
+.highlight a:hover  img{ opacity:1;}
+.zoomIN a img{ width:370px; height:370px; opacity:1;}
+.zoomIN a:hover img{ width:600px; height:600px; opacity:1;}
