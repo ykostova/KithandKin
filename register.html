@@ -10,6 +10,28 @@
 	media="screen">
 <link href="css/line.css" rel="stylesheet" media="screen">
 <link href="img/favicon.png" rel="icon" type="image/png">
+ <style>
+  	.valid {
+	  background: url('./css/images/checked.png') no-repeat;
+	  height:16px;
+	  width:16px;
+	  display: block;
+	  clear:both;
+	  top: 4px;
+	  padding-left: 18px;
+	}
+	.error {
+	  background: url('./css/images/unchecked.png') no-repeat;
+	  height:16px;
+	  width:16px;
+	  display: block;
+	  clear:both;
+	  top: 4px;
+	  padding-left: 18px;
+	  color:red;
+	}
+</style>
+  
 </head>
 <body>
 	<!-- Header  -->
@@ -39,42 +61,42 @@
 	<!-- Content -->
 	<div class="container top-margin" role="content_container">
 		<span id="error-place"></span>
-		<form id="reg-form" class="form-horizontal span6 offset3" action="login.html" role="registration_form">
+		<form id="reg-form" role="registration_form" class="form-horizontal span6 offset3" method="post" action="login.html">
 				<legend class="text-center">Register Now!</legend>
 				<div class="control-group">
-					<label class="control-label" for="inputFirstName">First
+					<label class="control-label" for="first_name">First
 						Name:</label>
 					<div class="controls">
-						<input type="text" id="first_name" name="first_name"
+						<input class="required" type="text" id="first_name" name="first_name"
 							placeholder="First Name" required>
 					</div>
 				</div>
 				<div class="control-group">
-					<label class="control-label" for="inputLastName">Last Name:</label>
+					<label class="control-label" for="last_name">Last Name:</label>
 					<div class="controls">
-						<input type="text" id="last_name" name="last_name"
+						<input class="required" type="text" id="last_name" name="last_name" 
 							placeholder="Last Name" required>
 					</div>
 				</div>
 				<div class="control-group">
-					<label class="control-label" for="inputEmail">Email:</label>
+					<label class="control-label" for="email">Email:</label>
 					<div class="controls">
 						<input class="required email" type="email" id="email" name="email" placeholder="Email" required>
 					</div>
 				</div>
 				<div class="control-group">
-					<label class="control-label" for="inputPassword">Password:</label>
+					<label class="control-label" for="password">Password:</label>
 					<div class="controls">
-						<input type="password" id="password" name="password"
+						<input class="required" type="password" id="password" name="password"
 							placeholder="Password" required>
 					</div>
 				</div>
 				<div class="control-group">
-					<label class="control-label" for="inputRePassword">Confirm
+					<label class="control-label" for="password_confirm">Confirm
 						Password:</label>
 					<div class="controls">
-						<input type="password" id="password_confirm" name="password_confirm"
-							placeholder="Conbfirm Password" required>
+						<input class="required" type="password" id="password_confirm" name="password_confirm"
+							placeholder="Confirm Password" required equalTo('#password')>
 					</div>
 				</div>
 				<div class="control-group">
@@ -95,13 +117,32 @@
 
 	<!-- end Content-->
 	<!-- JS Files -->
-	<script src="http://code.jquery.com/jquery.js"></script>
-	<script src="js/bootstrap.min.js"></script>
-	<!--<script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
-  	<script type="text/javascript" src="http://jzaefferer.github.com/jquery-validation/jquery.validate.js"></script>-->
-	<script src="http://github.com/appendto/jquery-mockjax/jquery.mockjax.js"></script>
-	<script src="http://bassistance.de/jquery-plugins/jquery-plugin-validation/jquery.validate.js"></script>
-	<script src="http://jquery.bassistance.de/validate/lib/jquery-1.9.0.js"></script>
+	<script type="text/javascript" src="js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
+	<script type="text/javascript" src="http://jzaefferer.github.com/jquery-validation/jquery.validate.js"></script>
+	
+	<script type="text/javascript">
+		$(window).load(function() {
+		    $('#reg_form').validate({
+		        errorPlacement: function (error, element) {
+		            error.insertAfter(element.parent());
+		        }
+		    });
+		});
+	</script>
+	<!--
+	
+	
+	
+	<script type="text/javascript" src="js/validate/jquery.mockjax.js"></script>
+	<script type="text/javascript" src="js/validate/jquery.js"></script>
+	<script type="text/javascript" src="js/validate/jquery.validate.js"></script>
+	<script type="text/javascript" src="js/validate/jquery-1.9.0.js"></script>
+
+	<script type="text/javascript" src="js/validate/additional-methods.js"></script>
+	<script type="text/javascript" src="js/validate/rules.js"></script>
+	<script type="text/javascript" src="js/validate/messages.js"></script>
+	
 
   	<script type="text/javascript">
 $(document).ready(function() {
@@ -119,14 +160,18 @@ $(document).ready(function() {
 	});
 
 	// validate signup form on keyup and submit
-	var validator = $("#reg_form").validate({
+	var validator = $('#reg_form').validate({
 		rules: {
-			firstname: "required",
-			lastname: "required",
-			username: {
+			first_name: {
+				required: true
+			},
+			last_name: {
+				required: true
+			},
+			email: {
 				required: true,
-				minlength: 2,
-				remote: "users.action"
+				email: true,
+				remote: "emails.action"
 			},
 			password: {
 				required: true,
@@ -136,18 +181,20 @@ $(document).ready(function() {
 				required: true,
 				minlength: 6,
 				equalTo: "#password"
-			},
-			email: {
-				required: true,
-				email: true,
-				remote: "emails.action"
-			},
-			dateformat: "required",
-			terms: "required"
+			}
 		},
 		messages: {
-			firstname: "Enter your firstname",
-			lastname: "Enter your lastname",
+			first_name: {
+				required: "Enter your firstname"
+			},
+			last_name: {
+				required: "Enter your lastname"
+			},
+			email: {
+				required: "Please enter a valid email address",
+				minlength: "Please enter a valid email address",
+				remote: jQuery.format("{0} is already in use")
+			},
 			password: {
 				required: "Provide a password",
 				rangelength: jQuery.format("Enter at least {0} characters")
@@ -156,20 +203,10 @@ $(document).ready(function() {
 				required: "Repeat your password",
 				minlength: jQuery.format("Enter at least {0} characters"),
 				equalTo: "Enter the same password as above"
-			},
-			email: {
-				required: "Please enter a valid email address",
-				minlength: "Please enter a valid email address",
-				remote: jQuery.format("{0} is already in use")
 			}
 		},
 		// the errorPlacement has to take the table layout into account
 		errorPlacement: function(error, element) {
-			if ( element.is(":radio") )
-				error.appendTo( element.parent().next().next() );
-			else if ( element.is(":checkbox") )
-				error.appendTo ( element.next() );
-			else
 				error.appendTo( element.parent().next() );
 		},
 		// specifying a submitHandler prevents the default submit, good for the demo
@@ -188,5 +225,6 @@ $(document).ready(function() {
 
 });
   	</script>
+-->	
 </body>
 </html>
