@@ -10,6 +10,27 @@
 	media="screen">
 <link href="css/line.css" rel="stylesheet" media="screen">
 <link href="img/favicon.png" rel="icon" type="image/png">
+ <style>
+  	.valid {
+	  background: url('./css/images/checked.png') no-repeat;
+	  height:16px;
+	  width:16px;
+	  display: block;
+	  clear:both;
+	  top: 4px;
+	  padding-left: 18px;
+	}
+	.error {
+	  background: url('./css/images/unchecked.png') no-repeat;
+	  height:16px;
+	  width:16px;
+	  display: block;
+	  clear:both;
+	  top: 4px;
+	  padding-left: 18px;
+	  color:red;
+	}
+</style>
 </head>
 <body>
 	<!-- Header  -->
@@ -59,22 +80,22 @@
 				</ul>
 				<div class="tab-content" role="tab_content">
 					<div class="tab-pane active span6" id="tab1">
-						<form class="form-horizontal span5" method="post" action="#">
+						<form class="form-horizontal span5" method="post" action="#" role="profile_form" if="profile_form">
 							<div class="control-group">
-								<label class="control-label" for="inputFirstName">First
+								<label class="control-label" for="first_name">First
 									Name:</label>
 								<div class="controls">
-									<input type="text" id="first_name" name="first_name"
+									<input class="required" type="text" id="first_name" name="first_name"
 										placeholder="First Name"
-										value="Yolina">
+										value="Yolina" required>
 								</div>
 							</div>
 							<div class="control-group">
 								<label class="control-label" for="inputLastName">Last
 									Name:</label>
 								<div class="controls">
-									<input type="text" id="last_name" name="last_name"
-										placeholder="Last Name" value="Kostova">
+									<input class="required" type="text" id="last_name" name="last_name"
+										placeholder="Last Name" value="Kostova" required>
 								</div>
 							</div>
 							<div class="control-group">
@@ -85,21 +106,21 @@
 								</div>
 							</div>
 							<div class="control-group">
-								<label class="control-label" for="Country">Country:</label>
+								<label class="control-label" for="country">Country:</label>
 								<div class="controls">
-										<input type="text" id="city" name="city" placeholder="country"
+										<input type="text" id="country" name="country" placeholder="country"
 										value="United Kingdom">
 								</div>
 							</div>
 							<div class="control-group">
-								<label class="control-label" for="inputCity">DOB:</label>
+								<label class="control-label" for="dob">DOB:</label>
 								<div class="controls">
-									<input type="text" id="city" name="city" placeholder="DOB"
+									<input type="text" id="dob" name="dob" placeholder="DOB"
 										value="21 February 1991">
 								</div>
 							</div>
 							<fieldset class="control-group">
-								<label class="control-label">Phone Number:</label>
+								<label class="control-label" for="phone_number">Phone Number:</label>
 								<div class="controls">
 									<div class="input-prepend">
 										<label class="add-on">+44</label>
@@ -109,7 +130,7 @@
 								</div>
 							</fieldset>
 							<fieldset class="control-group">
-								<label class="control-label">Website:</label>
+								<label class="control-label" for="website" >Website:</label>
 								<div class="controls">
 									<div class="input-prepend">
 										<label class="add-on">http://</label> <input type="text"
@@ -139,7 +160,18 @@
 	</div>
 	<!-- end Content-->
 	<!-- JS Files -->
-	<script src="http://code.jquery.com/jquery.js"></script>
-	<script src="js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
+	<script type="text/javascript" src="http://jzaefferer.github.com/jquery-validation/jquery.validate.js"></script>
+	
+	<script type="text/javascript">
+		$(window).load(function() {
+		    $('#profile_form').validate({
+		        errorPlacement: function (error, element) {
+		            error.insertAfter(element.parent());
+		        }
+		    });
+		});
+	</script>
 </body>
 </html>

@@ -10,6 +10,27 @@
 	media="screen">
 <link href="css/line.css" rel="stylesheet" media="screen">
 <link href="img/favicon.png" rel="icon" type="image/png">
+ <style>
+  	.valid {
+	  background: url('./css/images/checked.png') no-repeat;
+	  height:16px;
+	  width:16px;
+	  display: block;
+	  clear:both;
+	  top: 4px;
+	  padding-left: 18px;
+	}
+	.error {
+	  background: url('./css/images/unchecked.png') no-repeat;
+	  height:16px;
+	  width:16px;
+	  display: block;
+	  clear:both;
+	  top: 4px;
+	  padding-left: 18px;
+	  color:red;
+	}
+</style>
 </head>
 <body>
 	<!-- Header  -->
@@ -59,38 +80,38 @@
 				</ul>
 				<div class="tab-content" role="tab_content">
 					<div class="tab-pane active span6" id="tab1">
-						<form class="form-horizontal span5" method="post" action="#">
+						<form class="form-horizontal span5" method="post" action="#" id="account_form" role="account_form">
 							<div class="control-group">
-								<label class="control-label" for="inputName">Name: </label>
+								<label class="control-label" for="name">Name: </label>
 								<div class="controls">
-									<input type="text" id="name" name="name"
-										placeholder="Name" value="Yolina Kostova">
+									<input class="required name" type="text" id="name" name="name"
+										placeholder="Name" value="Yolina Kostova" required>
 								</div>
 							</div>
 							<hr class="line-divider">
 							<div class="control-group">
-								<label class="control-label" for="inputPassword">Old Password:</label>
+								<label class="control-label" for="password">Old Password:</label>
 								<div class="controls">
-									<input type="password" id="city" name="password" placeholder="Old Password">
+									<input class="required" type="password" id="password" name="password" placeholder="Old Password" required>
 								</div>
 							</div>
 							<div class="control-group">
-								<label class="control-label" for="inputPassword">Confirm Old Password:</label>
+								<label class="control-label" for="password_confirm">Confirm Old Password:</label>
 								<div class="controls">
-									<input type="password" id="city" name="con_password" placeholder="Old Password">
+									<input class="required" type="password" id="password_confirm" name="password_confirm" placeholder="Old Password" required equalTo('#password')>
 								</div>
 							</div>
 							<hr class="line-divider">
 							<div class="control-group">
-								<label class="control-label" for="inputPassword">New Password:</label>
+								<label class="control-label" for="pass">New Password:</label>
 								<div class="controls">
-									<input type="password" id="city" name="pass" placeholder="New Password">
+									<input class="required" type="password" id="pass" name="pass" placeholder="New Password" required>
 								</div>
 							</div>
 							<div class="control-group">
-								<label class="control-label" for="inputPassword">Confirm New Password:</label>
+								<label class="control-label" for="pass_confirm">Confirm New Password:</label>
 								<div class="controls">
-									<input type="password" id="city" name="con_pass" placeholder="New Password">
+									<input class="required" type="password" id="pass_confirm" name="pass_confirm" placeholder="New Password" required equalTo('#pass') >
 								</div>
 							</div>
 							<div class="control-group">
@@ -106,7 +127,17 @@
 	</div>
 	<!-- end Content-->
 	<!-- JS Files -->
-	<script src="http://code.jquery.com/jquery.js"></script>
-	<script src="js/bootstrap.min.js"></script>
-</body>
+	<script type="text/javascript" src="js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
+	<script type="text/javascript" src="http://jzaefferer.github.com/jquery-validation/jquery.validate.js"></script>
+	
+	<script type="text/javascript">
+		$(window).load(function() {
+		    $('#account_form').validate({
+		        errorPlacement: function (error, element) {
+		            error.insertAfter(element.parent());
+		        }
+		    });
+		});
+	</script>
 </html>

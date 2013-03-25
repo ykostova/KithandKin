@@ -10,6 +10,27 @@
 	media="screen">
 <link href="css/line.css" rel="stylesheet" media="screen">
 <link href="img/favicon.png" rel="icon" type="image/png">
+ <style>
+  	.valid {
+	  background: url('./css/images/checked.png') no-repeat;
+	  height:16px;
+	  width:16px;
+	  display: block;
+	  clear:both;
+	  top: 4px;
+	  padding-left: 18px;
+	}
+	.error {
+	  background: url('./css/images/unchecked.png') no-repeat;
+	  height:16px;
+	  width:16px;
+	  display: block;
+	  clear:both;
+	  top: 4px;
+	  padding-left: 18px;
+	  color:red;
+	}
+</style>
 </head>
 <body>
 	<!-- Header  -->
@@ -37,24 +58,24 @@
 	<!-- end Header -->
 	<!-- Content -->
 	<div class="container top-margin" role="content_container">
-		<form class="form-horizontal span6 offset3" method="post" action="#" role="login_form">
+		<form class="form-horizontal span6 offset3" method="post" action="home.html" role="login_form" id="login_form">
 				<legend class="text-center">Login</legend>
 				<div class="control-group">
-					<label class="control-label" for="inputEmail">Email:</label>
+					<label class="control-label" for="email">Email:</label>
 					<div class="controls">
-						<input type="email" id="email" name="email" placeholder="Email" required>
+						<input class="required" type="email" id="email" name="email" placeholder="Email" required>
 					</div>
 				</div>
 				<div class="control-group">
-					<label class="control-label" for="inputPassword" required>Password:</label>
+					<label class="control-label" for="password" required>Password:</label>
 					<div class="controls">
-						<input type="password" id="password" name="password"
+						<input class="required" type="password" id="password" name="password"
 							placeholder="Password">
 					</div>
 				</div>
 				<div class="control-group">
 					<div class="controls">
-						<button type="submit" onClick="parent.location='home.html'" class="btn btn-large btn-primary">Login</button>
+						<button type="submit" class="btn btn-large btn-primary">Login</button>
 					</div>
 				</div>
 				<div class="control-group">
@@ -65,7 +86,19 @@
 
 	<!-- end Content-->
 	<!-- JS Files -->
-	<script src="http://code.jquery.com/jquery.js"></script>
 	<script src="js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
+	<script type="text/javascript" src="http://jzaefferer.github.com/jquery-validation/jquery.validate.js"></script>
+	
+	<script type="text/javascript">
+		$(window).load(function() {
+		    $('#login_form').validate({
+		        errorPlacement: function (error, element) {
+		            error.insertAfter(element.parent());
+		        }
+		    });
+		});
+	</script>
 </body>
 </html>
