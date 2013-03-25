@@ -14,9 +14,9 @@
 </head>
 <body>
 	<!-- Header  -->
-	<div class="navbar navbar-inverse navbar-fixed-top">
-		<div class="navbar-inner">
-			<div class="container">
+	<div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+		<div class="navbar-inner" role="inner_navigation">
+			<div class="container" role="navigation_items">
 				<button type="button" class="btn btn-navbar" data-toggle="collapse"
 					data-target=".nav-collapse">
 					<span class="icon-bar"></span> <span class="icon-bar"></span> <span
@@ -36,10 +36,11 @@
 					<a class="btn btn-info dropdown-toggle" data-toggle="dropdown"
 						href="#"><span class="caret"></span></a>
 					<ul class="dropdown-menu">
-						<li><a href="#"><i class="icon-pencil"></i> Edit</a></li>
-						<li><a href="#"><i class="icon-book"></i> Albums</a></li>
-						<li><a href="#"><i class="icon-picture"></i> Add Picture</a></li>
-						<li><a href="#"><i class="icon-search"></i> Search</a></li>
+						<li><a href="profile.html"><i class="icon-pencil"></i> Edit</a></li>
+						<li><a href="home.html"><i class="icon-book"></i> Albums</a></li>
+						<li><a href="addPicture.html"><i class="icon-picture"></i> Add Picture</a></li>
+						<li><a href="searchContacts.html"><i class="icon-search"></i> Search Contacts</a></li>
+						<li><a href="search.html"><i class="icon-plus-sign"></i> Add Contact</a></li>
 						<li class="divider"></li>
 						<li><a href="#"><i class="icon-off"></i> Logout</a></li>
 					</ul>
@@ -50,9 +51,9 @@
 	</div>
 	<!-- end Header -->
 	<!-- Content -->
-	<div class="container">
-		<div class="span2">
-			<div class="sidebar-nav affix span2">
+	<div class="container" role="content_container">
+		<div class="span2 profile" role="profile_pane">
+			<div class="sidebar-nav span2">
 				<img src="./img/accountPic.png" class="img-polaroid">
 				<ul class="nav">
 						<li><br></li>
@@ -70,10 +71,14 @@
 				</div>
 			</div>
 			<!--/.well -->
+			<span class="clear-sides"><br/></span>
 		</div>
-		<div class="span9 top-margin">
+		<div class="span9 top-margin" role="main_content">
 			<div class="span9">
-				<p class="text-center"><strong>Summer 2012</strong></p><hr class="line-divider"/>
+				<p class="text-center"><strong>Summer 2012</strong></p>
+				<br/>
+				<a href="home.html">BACK TO ALBUMS</a>
+				<hr class="line-divider"/>
 						<div class="span2 img-polaroid accordion highlight">
 							<a href="pictureIN.html">
 								<img src="./img/sample.jpg">
@@ -122,16 +127,16 @@
 								<label class="float-left"><strong>My story of this picture...</strong></label>
 							</a>
 						</div>
-						<div class="top-margin float-left span2 accordion highlight">
+						<div class="top-margin span2 accordion highlight">
 						<a class="iframe" href="addPicture.html" title="ADD PICTURE">
-							<img src="./img/addImg.png" class="top-margin span1-5 img-rounded img-polaroid">
-							<label class="span1-5 text-center left-margin"><strong>ADD PICTURE</strong></label>
+							<img src="./img/addImg.png" class="span1-5 img-rounded img-polaroid">
+							<label class="top profile"><strong>ADD PICTURE</strong></label>
 							<br/>
 						</a>
 					</div>
 					<span class="clearfix controls-row"></span>
 					<hr class="line-divider">
-					<div class="pagination pagination-centered">
+					<div class="pagination pagination-centered" role="pagination">
 					<ul>
 						<li class="disabled"><a href="#">&laquo;</a></li>
 						<li class="active"><a href="#">1</a></li>

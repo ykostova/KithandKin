@@ -14,9 +14,9 @@
 </head>
 <body>
 	<!-- Header  -->
-	<div class="navbar navbar-inverse navbar-fixed-top">
-		<div class="navbar-inner">
-			<div class="container">
+	<div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+		<div class="navbar-inner" role="inner_navigation">
+			<div class="container" role="navigation_items">
 				<button type="button" class="btn btn-navbar" data-toggle="collapse"
 					data-target=".nav-collapse">
 					<span class="icon-bar"></span> <span class="icon-bar"></span> <span
@@ -51,9 +51,9 @@
 	</div>
 	<!-- end Header -->
 	<!-- Content -->
-	<div class="container">
-		<div class="span2">
-			<div class="sidebar-nav affix span2">
+	<div class="container" role="content_container">
+		<div class="span2 profile" role="profile_pane">
+			<div class="sidebar-nav span2">
 				<img src="./img/accountPic.png" class="img-polaroid">
 				<ul class="nav">
 						<li><br></li>
@@ -71,62 +71,70 @@
 				</div>
 			</div>
 			<!--/.well -->
+			<span class="clear-sides"><br/></span>
 		</div>
-		<div class="span9 top-margin">
+		<div class="span9 top-margin" role="main_content">
 			<div class="span9">
-					<p class="text-center"><strong>MY ALBUMS</strong></p><hr class="line-divider"/>
-					<div class="float-left span2 highlight">
+					<p class="text-center"><strong>MY ALBUMS</strong></p><hr class=" row-fluid line-divider"/>
+					<div class="span2 highlight ">
 						<a href="albumIN.html">
 							<img src="./img/photoAlbum2.png" class="img-rounded">
 							<label class="text-center controls"><strong>Summer 2012</strong></label>
 							<br/>
 						</a>
 					</div>
-					<div class="float-left span2 accordion highlight">
+					<div class="span2 highlight">
 						<a href="#">
 							<img src="./img/photoAlbum2.png" class="img-rounded">
 							<label class="text-center controls"><strong>ALBUM NAME</strong></label>
 							<br/>
 						</a>
 					</div>
-					<div class="float-left span2 accordion highlight">
+					<div class="span2 highlight">
 						<a href="#">
 							<img src="./img/photoAlbum2.png" class="img-rounded">
 							<label class="text-center controls"><strong>ALBUM NAME</strong></label>
 							<br/>
 						</a>
 					</div>
-					<div class="float-left span2 accordion highlight">
+					<div class="span2 highlight">
 						<a href="#">
 							<img src="./img/photoAlbum2.png" class="img-rounded">
 							<label class="text-center controls"><strong>ALBUM NAME</strong></label>
 							<br/>
 						</a>
 					</div>
-					<div class="float-left span2 accordion highlight">
+					<div class="span2 highlight">
 						<a href="#">
 							<img src="./img/photoAlbum2.png" class="img-rounded">
 							<label class="text-center controls"><strong>ALBUM NAME</strong></label>
 							<br/>
 						</a>
 					</div>
-					<div class="float-left span2 accordion highlight">
+					<div class="span2 highlight">
 						<a href="#">
 							<img src="./img/photoAlbum2.png" class="img-rounded">
 							<label class="text-center controls"><strong>ALBUM NAME</strong></label>
 							<br/>
 						</a>
 					</div>
-					<div class="float-left span2 accordion highlight">
+					<div class=" span2 highlight">
+						<a href="#">
+							<img src="./img/photoAlbum2.png" class="img-rounded">
+							<label class="text-center controls"><strong>ALBUM NAME</strong></label>
+							<br/>
+						</a>
+					</div>
+					<div class="top-margin span2 highlight">
 						<a class="iframe" href="addAlbum.html" title="ADD ALBUM">
-							<img src="./img/addImg.png" class=" span1-5 img-rounded img-polaroid">
-							<label class="span1-5 text-center left-margin"><strong>ADD ALBUM</strong></label>
+							<img src="./img/addImg.png" class="span1-5 img img-rounded img-polaroid">
+							<label class="top profile"><strong>ADD ALBUM</strong></label>
 							<br/>
 						</a>
 					</div>
 					<span class="clearfix controls-row"></span>
 					<hr class="line-divider">
-					<div class="pagination pagination-centered">
+					<div class="pagination pagination-centered" role="pagination">
 					<ul>
 						<li class="disabled"><a href="#">&laquo;</a></li>
 						<li class="active"><a href="#">1</a></li>

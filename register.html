@@ -13,9 +13,9 @@
 </head>
 <body>
 	<!-- Header  -->
-	<div class="navbar navbar-inverse navbar-fixed-top">
-		<div class="navbar-inner">
-			<div class="container">
+	<div class="navbar navbar-inverse navbar-fixed-top" id="main-nav" role="navigation">
+		<div class="navbar-inner" role="inner_navigation">
+			<div class="container" role="navigation_items">
 				<button type="button" class="btn btn-navbar" data-toggle="collapse"
 					data-target=".nav-collapse">
 					<span class="icon-bar"></span> <span class="icon-bar"></span> <span
@@ -37,44 +37,44 @@
 	</div>
 	<!-- end Header -->
 	<!-- Content -->
-	<div class="container top-margin">
-		<form class="form-horizontal span6 offset3" method="post"
-				action="#">
+	<div class="container top-margin" role="content_container">
+		<span id="error-place"></span>
+		<form id="reg-form" class="form-horizontal span6 offset3" action="login.html" role="registration_form">
 				<legend class="text-center">Register Now!</legend>
 				<div class="control-group">
 					<label class="control-label" for="inputFirstName">First
 						Name:</label>
 					<div class="controls">
 						<input type="text" id="first_name" name="first_name"
-							placeholder="First Name">
+							placeholder="First Name" required>
 					</div>
 				</div>
 				<div class="control-group">
 					<label class="control-label" for="inputLastName">Last Name:</label>
 					<div class="controls">
 						<input type="text" id="last_name" name="last_name"
-							placeholder="Last Name">
+							placeholder="Last Name" required>
 					</div>
 				</div>
 				<div class="control-group">
 					<label class="control-label" for="inputEmail">Email:</label>
 					<div class="controls">
-						<input type="email" id="email" name="email" placeholder="Email" required>
+						<input class="required email" type="email" id="email" name="email" placeholder="Email" required>
 					</div>
 				</div>
 				<div class="control-group">
-					<label class="control-label" for="inputPassword" required>Password:</label>
+					<label class="control-label" for="inputPassword">Password:</label>
 					<div class="controls">
 						<input type="password" id="password" name="password"
-							placeholder="Password">
+							placeholder="Password" required>
 					</div>
 				</div>
 				<div class="control-group">
 					<label class="control-label" for="inputRePassword">Confirm
 						Password:</label>
 					<div class="controls">
-						<input type="password" id="confirm_pass" name="confirm_pass"
-							placeholder="Re-Password" required>
+						<input type="password" id="password_confirm" name="password_confirm"
+							placeholder="Conbfirm Password" required>
 					</div>
 				</div>
 				<div class="control-group">
@@ -87,7 +87,7 @@
 				</div>
 				<div class="control-group">
 					<div class="controls">
-						<button type="submit" onClick="parent.location='login.html'" class="btn btn-large btn-primary">Register</button>
+						<button type="submit" class="btn btn-large btn-primary" id="reg-btn">Register</button>
 					</div>
 				</div>
 			</form>
@@ -97,5 +97,96 @@
 	<!-- JS Files -->
 	<script src="http://code.jquery.com/jquery.js"></script>
 	<script src="js/bootstrap.min.js"></script>
+	<!--<script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
+  	<script type="text/javascript" src="http://jzaefferer.github.com/jquery-validation/jquery.validate.js"></script>-->
+	<script src="http://github.com/appendto/jquery-mockjax/jquery.mockjax.js"></script>
+	<script src="http://bassistance.de/jquery-plugins/jquery-plugin-validation/jquery.validate.js"></script>
+	<script src="http://jquery.bassistance.de/validate/lib/jquery-1.9.0.js"></script>
+
+  	<script type="text/javascript">
+$(document).ready(function() {
+	$.mockjax({
+		url: "emails.action",
+		response: function(settings) {
+			var email = settings.data.email,
+				emails = ["glen@marketo.com", "george@bush.gov", "me@god.com", "aboutface@cooper.com", "steam@valve.com", "bill@gates.com"];
+			this.responseText = "true";
+			if ( $.inArray( email, emails ) !== -1 ) {
+				this.responseText = "That's already taken.";
+			}
+		},
+		responseTime: 500
+	});
+
+	// validate signup form on keyup and submit
+	var validator = $("#reg_form").validate({
+		rules: {
+			firstname: "required",
+			lastname: "required",
+			username: {
+				required: true,
+				minlength: 2,
+				remote: "users.action"
+			},
+			password: {
+				required: true,
+				minlength: 6
+			},
+			password_confirm: {
+				required: true,
+				minlength: 6,
+				equalTo: "#password"
+			},
+			email: {
+				required: true,
+				email: true,
+				remote: "emails.action"
+			},
+			dateformat: "required",
+			terms: "required"
+		},
+		messages: {
+			firstname: "Enter your firstname",
+			lastname: "Enter your lastname",
+			password: {
+				required: "Provide a password",
+				rangelength: jQuery.format("Enter at least {0} characters")
+			},
+			password_confirm: {
+				required: "Repeat your password",
+				minlength: jQuery.format("Enter at least {0} characters"),
+				equalTo: "Enter the same password as above"
+			},
+			email: {
+				required: "Please enter a valid email address",
+				minlength: "Please enter a valid email address",
+				remote: jQuery.format("{0} is already in use")
+			}
+		},
+		// the errorPlacement has to take the table layout into account
+		errorPlacement: function(error, element) {
+			if ( element.is(":radio") )
+				error.appendTo( element.parent().next().next() );
+			else if ( element.is(":checkbox") )
+				error.appendTo ( element.next() );
+			else
+				error.appendTo( element.parent().next() );
+		},
+		// specifying a submitHandler prevents the default submit, good for the demo
+		submitHandler: function() {
+			alert("submitted!");
+		},
+		// set this class to error-labels to indicate valid fields
+		success: function(label) {
+			// set &nbsp; as text for IE
+			label.html("&nbsp;").addClass("checked");
+		},
+		highlight: function(element, errorClass) {
+			$(element).parent().next().find("." + errorClass).removeClass("checked");
+		}
+	});
+
+});
+  	</script>
 </body>
 </html>
